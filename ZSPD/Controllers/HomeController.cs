@@ -15,6 +15,7 @@ namespace ZSPD.Controllers
 
         public ActionResult About()
         {
+            //przykładowy koment
             ViewBag.Message = "Your application description page.";
 
             return View();
