@@ -9,6 +9,10 @@
 
 
 <div class="table-responsive">
+    <div>
+        <h3 class="sub-header">Autor: @Model.Author.Name @Model.Author.Surname</h3>
+        <h4>Data utworzenia: @Model.CreateDate</h4>
+    </div>
     <table id="walletTable" class="table table-bordered">
         <thead>
             <tr>
@@ -19,8 +23,14 @@
         <tbody>
             @foreach (var question in Model.Questions)
             {
+                double averageGrade = 0;
+                if (question.Grades.Count != 0)
+                {
+                    averageGrade = question.Grades.Average(x => x.Value);
+                }
                 <tr>
                     <td>@question.Content</td>
+                    <td>@averageGrade</td>
                 </tr>
            }
     </tbody>

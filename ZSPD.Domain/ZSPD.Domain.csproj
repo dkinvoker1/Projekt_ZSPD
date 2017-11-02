@@ -11,6 +11,21 @@
     <AssemblyName>ZSPD.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -67,6 +82,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -75,6 +91,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Diagrams\Database\Diagram.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Diagram.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Managers\IdentityManagers\ApplicationSignInManager.cs" />
     <Compile Include="Managers\IdentityManagers\ApplicationUserManager.cs" />
     <Compile Include="Migrations\201711011639454_new.cs" />
@@ -84,6 +105,14 @@
     <Compile Include="Migrations\201711012035247_new2.cs" />
     <Compile Include="Migrations\201711012035247_new2.Designer.cs">
       <DependentUpon>201711012035247_new2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711021719439_new3.cs" />
+    <Compile Include="Migrations\201711021719439_new3.Designer.cs">
+      <DependentUpon>201711021719439_new3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711021828025_new4.cs" />
+    <Compile Include="Migrations\201711021828025_new4.Designer.cs">
+      <DependentUpon>201711021828025_new4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -96,18 +125,66 @@
     <Compile Include="Models\EntityModels\Accounts\User.cs" />
     <Compile Include="Models\EntityModels\Question.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Diagrams\Database\Diagram.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Diagram.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Diagrams\EntityModels\EntityModelsDiagram.cd" />
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Diagrams\Database\Diagram.dbml.layout">
+      <DependentUpon>Diagram.dbml</DependentUpon>
+    </None>
     <EmbeddedResource Include="Migrations\201711011639454_new.resx">
       <DependentUpon>201711011639454_new.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711012035247_new2.resx">
       <DependentUpon>201711012035247_new2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711021719439_new3.resx">
+      <DependentUpon>201711021719439_new3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711021828025_new4.resx">
+      <DependentUpon>201711021828025_new4.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ZSPD_DB.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ZSPD_DB_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>ZSPD_DB.mdf</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ZSPD.Domain.Models.EntityModels
 {
@@ -6,10 +7,10 @@ namespace ZSPD.Domain.Models.EntityModels
     {
         public int Id { get; set; }
 
-        [ForeignKey("Question")]
-        public int QuestionId { get; set; }
         public virtual Question Question { get; set; }
 
         public int AnswerRate { get; set; }
+
+        public DateTime AnswerDate { get; set; }
     }
 }

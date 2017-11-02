@@ -82,6 +82,15 @@ namespace ZSPD.Domain.Migrations
                 userManager.Create(userToInsert, "test");
                 userManager.AddToRole(userToInsert.Id, Roles.User);
             }
+
+            if (!(context.Users.Any(u => u.UserName == "testUser2")))
+            {
+                var userToInsert = new User { UserName = "testUser2" };
+
+                userManager.Create(userToInsert, "test");
+                userManager.AddToRole(userToInsert.Id, Roles.User);
+            }
+
             context.SaveChanges();
         }
         private void AddPsychologists(ZSPD.Domain.Models.ApplicationDbContext context)

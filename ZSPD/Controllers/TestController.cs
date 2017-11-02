@@ -21,15 +21,6 @@ namespace ZSPD.Controllers
         public ActionResult ShowAllQuestions()
         {
             var questions = _context.Questions.ToList();
-            var grades = _context.Grades.ToList();
-
-            foreach(var question in questions)
-            {
-                var averageRate = grades.Where(x => x.QuestionId == question.Id)
-                                        .Average(x => x.Value);
-
-                question.AverageRate = averageRate;
-            }
 
             return View(questions);
         }
@@ -158,13 +149,13 @@ namespace ZSPD.Controllers
                 var questionId = question.Id;
 
                 var value = _rand.Next(1, 6);
-                var userGrade = userGrades.FirstOrDefault(x => x.QuestionId == question.Id);
+                var userGrade = userGrades.FirstOrDefault(x => x.Question.Id == question.Id);
 
                 if(userGrade == null)
                 {
                     user.QuestionsGrades.Add(new Grade
                     {
-                        QuestionId = question.Id,
+                        Question = question,
                         Value = value
                     });
                 }
@@ -215,6 +206,7 @@ namespace ZSPD.Controllers
                     {
                         Question = question,
                         AnswerRate = _rand.Next(1,5),
+                        AnswerDate = DateTime.Now
                     }
                 );
             }
