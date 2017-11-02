@@ -1,0 +1,31 @@
+﻿@model ZSPD.Domain.Models.EntityModels.Survey
+
+@{
+    ViewBag.Title = "ShowSurvey";
+}
+
+<h2>Ankieta</h2>
+<h3>@Model.Id</h3>
+
+
+<div class="table-responsive">
+    <table id="walletTable" class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Treść</th>
+                <th>Ocena</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var question in Model.Questions)
+            {
+                <tr>
+                    <td>@question.Content</td>
+                </tr>
+           }
+    </tbody>
+    </table>
+    <div>
+        <h3 class="sub-footer"></h3>
+    </div>
+</div>

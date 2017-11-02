@@ -1,0 +1,167 @@
+﻿@model ZSPD.Domain.Models.EntityModels.Accounts.User
+
+@{
+    ViewBag.Title = "ShowActualUserData";
+}
+
+<h2>ShowActualUserData</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailConfirmed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailConfirmed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PasswordHash)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PasswordHash)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecurityStamp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecurityStamp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumberConfirmed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TwoFactorEnabled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LockoutEndDateUtc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LockoutEnabled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LockoutEnabled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccessFailedCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccessFailedCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SurveyIsStarted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SurveyIsStarted)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    @if (Model.ActiveSurvey != null)
+    {
+    <div class="table-responsive">
+        <div>
+            Id ankiety: @Model.ActiveSurvey.Id
+        </div>
+        <table id="walletTable" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Treść</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var question in Model.ActiveSurvey.Questions)
+                {
+                    <tr>
+                        <td>@question.Content</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div>
+            <h3 class="sub-footer"></h3>
+        </div>
+    </div>
+    }
+</div>
+<div>
+    @if (Model.Answers != null)
+    {
+        <div class="table-responsive">
+            <div>
+            </div>
+            <table id="walletTable" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Treść</th>
+                        <th>Odpowiedź</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var answer in Model.Answers)
+                {
+                        <tr>
+                            <td>@answer.Question.Content</td>
+                            <td>@answer.AnswerRate</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div>
+                <h3 class="sub-footer"></h3>
+            </div>
+        </div>
+    }
+</div>

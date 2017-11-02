@@ -1,0 +1,24 @@
+﻿@model IEnumerable<ZSPD.Domain.Models.EntityModels.Survey>
+
+@{
+    ViewBag.Title = "ShowAllSurveys";
+}
+
+<h2>ShowAllSurveys</h2>
+
+<table class="table">
+    <tr>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            Ankieta o id: @item.Id .
+
+            @Html.ActionLink("Szczegóły", "ShowSurvey", new { id=item.Id }) |
+        </td>
+    </tr>
+}
+
+</table>
