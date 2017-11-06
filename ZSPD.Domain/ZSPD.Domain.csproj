@@ -137,22 +137,6 @@
     <Compile Include="Managers\IStudentManager.cs" />
     <Compile Include="Managers\PsychologistManager.cs" />
     <Compile Include="Managers\StudentManager.cs" />
-    <Compile Include="Migrations\201711011639454_new.cs" />
-    <Compile Include="Migrations\201711011639454_new.Designer.cs">
-      <DependentUpon>201711011639454_new.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711012035247_new2.cs" />
-    <Compile Include="Migrations\201711012035247_new2.Designer.cs">
-      <DependentUpon>201711012035247_new2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711021719439_new3.cs" />
-    <Compile Include="Migrations\201711021719439_new3.Designer.cs">
-      <DependentUpon>201711021719439_new3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711021828025_new4.cs" />
-    <Compile Include="Migrations\201711021828025_new4.Designer.cs">
-      <DependentUpon>201711021828025_new4.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\EntityModels\Accounts\AppUser.cs" />
@@ -188,18 +172,6 @@
     <None Include="Diagrams\Database\Diagram.dbml.layout">
       <DependentUpon>Diagram.dbml</DependentUpon>
     </None>
-    <EmbeddedResource Include="Migrations\201711011639454_new.resx">
-      <DependentUpon>201711011639454_new.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711012035247_new2.resx">
-      <DependentUpon>201711012035247_new2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711021719439_new3.resx">
-      <DependentUpon>201711021719439_new3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711021828025_new4.resx">
-      <DependentUpon>201711021828025_new4.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
