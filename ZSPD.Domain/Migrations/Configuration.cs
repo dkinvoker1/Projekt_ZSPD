@@ -30,7 +30,7 @@ namespace ZSPD.Domain.Migrations
         private void CreateRoles(ZSPD.Domain.Models.ApplicationDbContext context)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            var UserManager = new UserManager<User>(new UserStore<User>(context));
+            var UserManager = new UserManager<Student>(new UserStore<Student>(context));
 
 
             if (!roleManager.RoleExists(Roles.User))
@@ -63,8 +63,8 @@ namespace ZSPD.Domain.Migrations
 
         private void AddUsers(ZSPD.Domain.Models.ApplicationDbContext context)
         {
-            var userStore = new UserStore<User>(context);
-            var userManager = new UserManager<User>(userStore);
+            var userStore = new UserStore<Student>(context);
+            var userManager = new UserManager<Student>(userStore);
 
             userManager.PasswordValidator = new PasswordValidator
             {
@@ -77,7 +77,7 @@ namespace ZSPD.Domain.Migrations
 
             if (!(context.Users.Any(u => u.UserName == "testUser")))
             {
-                var userToInsert = new User { UserName = "testUser" };
+                var userToInsert = new Student { UserName = "testUser" };
 
                 userManager.Create(userToInsert, "test");
                 userManager.AddToRole(userToInsert.Id, Roles.User);
@@ -85,7 +85,7 @@ namespace ZSPD.Domain.Migrations
 
             if (!(context.Users.Any(u => u.UserName == "testUser2")))
             {
-                var userToInsert = new User { UserName = "testUser2" };
+                var userToInsert = new Student { UserName = "testUser2" };
 
                 userManager.Create(userToInsert, "test");
                 userManager.AddToRole(userToInsert.Id, Roles.User);

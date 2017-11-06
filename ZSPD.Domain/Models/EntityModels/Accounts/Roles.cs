@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ZSPD.Domain.Models.EntityModels.Accounts
+﻿namespace ZSPD.Domain.Models.EntityModels.Accounts
 {
     public static class Roles
     {

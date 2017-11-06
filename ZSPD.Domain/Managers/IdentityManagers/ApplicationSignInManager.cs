@@ -5,7 +5,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin;
 
-using ZSPD.Domain.Models.EntityModels;
 using ZSPD.Domain.Models.EntityModels.Accounts;
 
 namespace ZSPD.Domain.Managers.IdentityManagers

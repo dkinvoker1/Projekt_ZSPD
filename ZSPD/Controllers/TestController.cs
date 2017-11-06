@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -103,7 +102,7 @@ namespace ZSPD.Controllers
         [Authorize(Roles = Roles.Psychologist)]
         public ActionResult ShowAllUsers()
         {
-            var users = _context.AppUsers;
+            var users = _context.Students;
 
             return View(users);
         }
@@ -111,7 +110,7 @@ namespace ZSPD.Controllers
         [Authorize(Roles = Roles.Psychologist)]
         public ActionResult AddSurveyToUser(string id)
         {
-            var user = _context.AppUsers.FirstOrDefault(x => x.Id == id);
+            var user = _context.Students.FirstOrDefault(x => x.Id == id);
             if(user == null) { return null; }
 
             int surveyNumber = _rand.Next(0, _context.Surveys.Count()-1);
@@ -130,7 +129,7 @@ namespace ZSPD.Controllers
         [Authorize(Roles = Roles.Psychologist)]
         public ActionResult ShowUser(string id)
         {
-            var user = _context.AppUsers.FirstOrDefault(x => x.Id == id);
+            var user = _context.Students.FirstOrDefault(x => x.Id == id);
             if (user == null) { return null; }
 
             return View("ShowUserData", user);
@@ -178,7 +177,7 @@ namespace ZSPD.Controllers
 
             if (User.IsInRole(Roles.User))
             {
-                var user = _context.AppUsers.FirstOrDefault(x => x.Id == userId);
+                var user = _context.Students.FirstOrDefault(x => x.Id == userId);
                 return View("ShowUserData", user);
             }
             
@@ -195,7 +194,7 @@ namespace ZSPD.Controllers
         public ActionResult FillSurvey()
         {
             string userId = User.Identity.GetUserId();
-            var user = _context.AppUsers.FirstOrDefault(x => x.Id == userId);
+            var user = _context.Students.FirstOrDefault(x => x.Id == userId);
 
             var survey = user.ActiveSurvey;
 

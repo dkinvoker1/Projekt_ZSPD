@@ -15,7 +15,7 @@ namespace ZSPD.Domain.Models
         public virtual DbSet<Grade> Grades { get; set; }
 
         public DbSet<Psychologist> Psychologists { get; set; }
-        public DbSet<User> AppUsers { get; set; }
+        public DbSet<Student> Students { get; set; }
 
         public ApplicationDbContext()
             : base("ZSPD_DB", throwIfV1Schema: false)
@@ -29,7 +29,7 @@ namespace ZSPD.Domain.Models
             modelBuilder.Entity<Survey>().HasMany(x => x.Questions).WithMany();
 
             modelBuilder.Entity<Psychologist>().ToTable("Psychologists");
-            modelBuilder.Entity<User>().ToTable("Users");
+            modelBuilder.Entity<Student>().ToTable("Users");
         }
 
         public static ApplicationDbContext Create()
