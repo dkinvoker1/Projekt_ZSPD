@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ZSPD.Domain.Models.EntityModels.Answer">
+    <Position X="1" Y="5.75" Width="1.5" />
+    <AssociationLine Name="Question" Type="ZSPD.Domain.Models.EntityModels.Question" FixedToPoint="true">
+      <Path>
+        <Point X="2.5" Y="6.625" />
+        <Point X="6.5" Y="6.625" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAECAAAAAAAAAA=</HashCode>
+      <FileName>Models\EntityModels\Answer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Question" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ZSPD.Domain.Models.EntityModels.Grade">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAgAAAAAAA=</HashCode>
+      <FileName>Models\EntityModels\Grade.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Question" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ZSPD.Domain.Models.EntityModels.Question">
+    <Position X="6.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\EntityModels\Question.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Grades" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ZSPD.Domain.Models.EntityModels.Survey">
+    <Position X="3.75" Y="3.5" Width="1.5" />
+    <AssociationLine Name="Questions" Type="ZSPD.Domain.Models.EntityModels.Question" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.5" Y="4.796" />
+        <Point X="4.5" Y="6.188" />
+        <Point X="6.5" Y="6.188" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAgAAAAAAAAAAAAAAEAAABAAAAAAA=</HashCode>
+      <FileName>Models\EntityModels\Survey.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Author" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Questions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ZSPD.Domain.Models.EntityModels.Accounts.User">
+    <Position X="1" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAgAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Models\EntityModels\Accounts\User.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ActiveSurvey" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Answers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ZSPD.Domain.Models.EntityModels.Accounts.AppUser">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\EntityModels\Accounts\AppUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ZSPD.Domain.Models.EntityModels.Accounts.Psychologist">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAQABAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Models\EntityModels\Accounts\Psychologist.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Surveys" />
+      <Property Name="QuestionsGrades" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ZSPD.Domain.Models.EntityModels.Accounts.Roles" Collapsed="true">
+    <Position X="0.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAACAAAA=</HashCode>
+      <FileName>Models\EntityModels\Accounts\Roles.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

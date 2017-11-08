@@ -1,0 +1,41 @@
+﻿@model ZSPD.Domain.Models.EntityModels.Survey
+
+@{
+    ViewBag.Title = "ShowSurvey";
+}
+
+<h2>Ankieta</h2>
+<h3>@Model.Id</h3>
+
+
+<div class="table-responsive">
+    <div>
+        <h3 class="sub-header">Autor: @Model.Author.Name @Model.Author.Surname</h3>
+        <h4>Data utworzenia: @Model.CreateDate</h4>
+    </div>
+    <table id="walletTable" class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Treść</th>
+                <th>Ocena</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var question in Model.Questions)
+            {
+                double averageGrade = 0;
+                if (question.Grades.Count != 0)
+                {
+                    averageGrade = question.Grades.Average(x => x.Value);
+                }
+                <tr>
+                    <td>@question.Content</td>
+                    <td>@averageGrade</td>
+                </tr>
+           }
+    </tbody>
+    </table>
+    <div>
+        <h3 class="sub-footer"></h3>
+    </div>
+</div>
