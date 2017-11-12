@@ -137,9 +137,9 @@
     <Compile Include="Managers\IStudentManager.cs" />
     <Compile Include="Managers\PsychologistManager.cs" />
     <Compile Include="Managers\StudentManager.cs" />
-    <Compile Include="Migrations\201711080947453_addSurveyToAnswer.cs" />
-    <Compile Include="Migrations\201711080947453_addSurveyToAnswer.Designer.cs">
-      <DependentUpon>201711080947453_addSurveyToAnswer.cs</DependentUpon>
+    <Compile Include="Migrations\201711121655106_new.cs" />
+    <Compile Include="Migrations\201711121655106_new.Designer.cs">
+      <DependentUpon>201711121655106_new.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -193,8 +193,8 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711080947453_addSurveyToAnswer.resx">
-      <DependentUpon>201711080947453_addSurveyToAnswer.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711121655106_new.resx">
+      <DependentUpon>201711121655106_new.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

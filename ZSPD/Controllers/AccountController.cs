@@ -4,8 +4,10 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+
 using ZSPD.Domain.Managers.IdentityManagers;
 using ZSPD.Models;
+using ZSPD.Domain.Models.EntityModels.Accounts;
 
 namespace ZSPD.Controllers
 {
@@ -86,6 +88,46 @@ namespace ZSPD.Controllers
                     return View(model);
             }
         }
+
+        //
+        // GET: /Account/Register
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            var registerVM = new RegisterViewModel();
+
+            return View(registerVM);
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new Domain.Models.EntityModels.Accounts.Psychologist
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                };
+
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, Roles.Psychologist);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+
+            return View(model);
+        }
+
 
         //
         // POST: /Account/LogOff
