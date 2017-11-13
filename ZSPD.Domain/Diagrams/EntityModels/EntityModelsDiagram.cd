@@ -5,15 +5,25 @@
     <AssociationLine Name="Question" Type="ZSPD.Domain.Models.EntityModels.Question" FixedToPoint="true">
       <Path>
         <Point X="2.5" Y="6.625" />
+        <Point X="4.229" Y="6.625" Type="JumpStart" />
+        <Point X="4.396" Y="6.625" Type="JumpEnd" />
         <Point X="6.5" Y="6.625" />
       </Path>
     </AssociationLine>
+    <AssociationLine Name="Survey" Type="ZSPD.Domain.Models.EntityModels.Survey" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.5" Y="6.963" />
+        <Point X="4.312" Y="6.963" />
+        <Point X="4.312" Y="4.796" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAECAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAECACAAAAAAAA=</HashCode>
       <FileName>Models\EntityModels\Answer.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Question" />
+      <Property Name="Survey" />
     </ShowAsAssociation>
   </Class>
   <Class Name="ZSPD.Domain.Models.EntityModels.Grade">
@@ -40,8 +50,8 @@
     <Position X="3.75" Y="3.5" Width="1.5" />
     <AssociationLine Name="Questions" Type="ZSPD.Domain.Models.EntityModels.Question" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="4.5" Y="4.796" />
-        <Point X="4.5" Y="6.188" />
+        <Point X="4.875" Y="4.796" />
+        <Point X="4.875" Y="6.188" />
         <Point X="6.5" Y="6.188" />
       </Path>
     </AssociationLine>
@@ -56,11 +66,11 @@
       <Property Name="Questions" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="ZSPD.Domain.Models.EntityModels.Accounts.User">
+  <Class Name="ZSPD.Domain.Models.EntityModels.Accounts.Student">
     <Position X="1" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEAAAAgAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
-      <FileName>Models\EntityModels\Accounts\User.cs</FileName>
+      <FileName>Models\EntityModels\Accounts\Student.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="ActiveSurvey" />
