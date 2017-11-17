@@ -15,19 +15,12 @@ namespace ZSPD.Controllers
             return View();
         }
 
-        public ActionResult About()
+        //tymczasowe, dopytać DL jak to widzi - menu modułu psychologa chyba powinno być w jego kontrolerze,
+        //aczkolwiek trzebaby takowy stworzyć i byłaby w nim tylko jedna metoda, bo reszta w students i surveys.
+        public ActionResult Psychologist()
         {
-            //przykładowy koment 
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

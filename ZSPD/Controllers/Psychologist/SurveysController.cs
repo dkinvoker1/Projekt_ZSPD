@@ -15,7 +15,15 @@ namespace ZSPD.Controllers.Psychologist
             _psychologistManager = psychologistManager;
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
 
+        public ActionResult Assign()
+        {
+            return View();
+        }
         //...
     }
 }
