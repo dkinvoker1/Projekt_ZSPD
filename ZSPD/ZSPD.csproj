@@ -253,12 +253,13 @@
     <Content Include="Views\Test\ShowUserSurveys.cshtml" />
     <Content Include="Views\Test\ShowAllUsers.cshtml" />
     <Content Include="Views\Home\Psychologist.cshtml" />
+    <Content Include="Views\Surveys\Create.cshtml" />
+    <Content Include="Views\Surveys\Assign.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\FillSurvey\" />
     <Folder Include="Views\Students\" />
-    <Folder Include="Views\Surveys\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
