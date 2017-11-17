@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ZSPD.Models;
+using ZSPD.Domain.Models;
+using ZSPD.Domain.Models.EntityModels;
 
 namespace ZSPD.Controllers
 {
@@ -16,6 +17,7 @@ namespace ZSPD.Controllers
 
         public ActionResult About()
         {
+            //przykładowy koment 
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -27,7 +29,5 @@ namespace ZSPD.Controllers
 
             return View();
         }
-
-
     }
 }
