@@ -1,0 +1,19 @@
+﻿<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Stwórz ankietę</div>
+</div>
+<form>
+    @for (int i = 1; i < 50; i++)
+    {
+        <div class="checkbox">
+            <label><input type="checkbox" value="">Pytanie @i</label>
+        </div>
+    }
+
+
+
+</form>
+<a href="Index"><button class="col-lg-2 btn-info btn">Zapisz</button></a>
