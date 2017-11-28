@@ -197,7 +197,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Psychologist\StudentsController.cs" />
     <Compile Include="Controllers\Psychologist\SurveysController.cs" />
+    <Compile Include="Controllers\Student\ChooseSurveyController.cs" />
     <Compile Include="Controllers\Student\FillSurveyController.cs" />
+    <Compile Include="Controllers\Student\SurveyController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -260,9 +262,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ChooseSurvey\" />
     <Folder Include="Views\FillSurvey\" />
     <Folder Include="Views\Students\" />
-    <Folder Include="Views\Surveys\" />
+    <Folder Include="Views\Survey\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
