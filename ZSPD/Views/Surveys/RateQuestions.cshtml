@@ -1,0 +1,42 @@
+﻿<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Oceń pytania</div>
+</div>
+
+
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Edytuj pytania</div>
+</div>
+
+
+
+@for (int i = 1; i < 50; i++)
+{
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="pwd">Treść pytania @i</label>
+            &nbsp;
+            <label class="radio-inline"><input type="radio" name="optradio" checked="checked">Brak</label>
+            &nbsp;
+            <label class="radio-inline"><input type="radio" name="optradio">1</label>
+            &nbsp;
+            <label class="radio-inline"><input type="radio" name="optradio">2</label>
+            &nbsp;
+            <label class="radio-inline"><input type="radio" name="optradio">3</label>
+            &nbsp;
+            <label class="radio-inline"><input type="radio" name="optradio">4</label>
+            &nbsp;
+            <label class="radio-inline"><input type="radio" name="optradio">5</label>
+        </div>
+        
+    </form>
+}
+<br />
+<br />
+<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Wstecz</button></a>
+<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Oceń</button></a>
