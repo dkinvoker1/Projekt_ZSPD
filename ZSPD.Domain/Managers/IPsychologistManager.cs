@@ -27,6 +27,8 @@ namespace ZSPD.Domain.Managers
 
         void AddSurveyToStudent(Survey survey, string studentId);
 
-        //...
+		//...
+
+		void AddOrUpdateRateQuestion(int? grade, string userId, int questionId);
     }
 }

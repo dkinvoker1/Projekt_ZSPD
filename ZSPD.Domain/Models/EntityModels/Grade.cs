@@ -9,5 +9,5 @@ namespace ZSPD.Domain.Models.EntityModels
         public virtual Question Question { get; set; }
 
         public int Value { get; set; }
-    }
+	}
 }
