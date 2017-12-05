@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 
 using System.Web.Mvc;
 using ZSPD.Domain.Managers;
+using ZSPD.Models;
 
 
 namespace ZSPD.Controllers.Student
@@ -18,40 +19,25 @@ namespace ZSPD.Controllers.Student
         {
             _studentManager = studentManager;
         }
-
-        
-        public ActionResult ChooseSurvey()
-        {
-            var surveys = _studentManager.GetAllSurveys();
-            return View(surveys);
-        }
-
-        [HttpGet]
-        public ActionResult ChooseSurvey(int surveyID)
-        {
-            //Convert.ToInt32(Request[])
-            //var surveyID = Convert.ToInt32(Request["surveyID"]);
-            var survey = _studentManager.GetSurvey(surveyID);
-            var user = User.Identity.GetUserId();
-
-            _studentManager.SetActiveSurvey(survey, user);
-
-            return RedirectToAction("FillSurvey", "Survey"); 
-        }
-   
+    
         public ActionResult FillSurvey()
         {
             var user = User.Identity.GetUserId();
-            var survey = _studentManager.GetActiveSurvey(user);
-            return View(survey);
+
+            SurveyViewModel SVM = new SurveyViewModel();
+            SVM.activeSurvey = _studentManager.GetActiveSurvey(user);
+
+            return View(SVM);
         }
 
-        //[HttpPost]
-        //public ActionResult FillSurvey()
-        //{
-        //    return RedirectToAction("Index", "Home");
-        //}
+        [HttpPost]
+        public ActionResult FillSurvey(SurveyViewModel SVM)
+        {
+            var answers = SVM.Answers;
+            var user = User.Identity.GetUserId();
 
-        //...
+            _studentManager.SaveAnswers(answers, user);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
