@@ -1,0 +1,25 @@
+﻿<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Stwórz ankietę</div>
+</div>
+
+    @for (int i = 1; i <= 10; i++)
+    {
+        
+            <label>Ankieta @i</label>
+            <button class="col-lg-2 btn-info btn" onclick="location.href='Edit';">Edytuj</button>
+            <button class="col-lg-2 btn-info btn">Usuń</button>
+        
+            
+        <br />
+        <br />
+    }
+
+
+
+
+<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Wstecz</button></a>
+<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Zapisz</button></a>

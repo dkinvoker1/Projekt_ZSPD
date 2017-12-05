@@ -259,6 +259,8 @@
     <Content Include="Views\Surveys\Assign.cshtml" />
     <Content Include="Views\Surveys\ModifyQuestions.cshtml" />
     <Content Include="Views\Surveys\RateQuestions.cshtml" />
+    <Content Include="Views\Surveys\Manage.cshtml" />
+    <Content Include="Views\Surveys\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
