@@ -24,6 +24,25 @@ namespace ZSPD.Controllers.Psychologist
         {
             return View();
         }
+
+        public ActionResult ModifyQuestions()
+        {
+            return View();
+        }
+
+        public ActionResult RateQuestions()
+        {
+            return View();
+        }
+
+        public ActionResult Manage()
+        {
+            return View();
+        }
+        public ActionResult Edit()
+        {
+            return View();
+        }
         //...
     }
 }

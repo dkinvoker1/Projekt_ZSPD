@@ -5,16 +5,21 @@
 <div class="panel panel-primary">
     <div class="panel-heading">Stwórz ankietę</div>
 </div>
-<form>
-    @for (int i = 1; i < 50; i++)
+
+    @for (int i = 1; i <= 10; i++)
     {
-        <div class="checkbox">
-            <label><input type="checkbox" value="">Pytanie @i</label>
-        </div>
+        
+            <label>Ankieta @i</label>
+            <button class="col-lg-2 btn-info btn" onclick="location.href='Edit';">Edytuj</button>
+            <button class="col-lg-2 btn-info btn">Usuń</button>
+        
+            
+        <br />
+        <br />
     }
 
 
 
-</form>
+
 <a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Wstecz</button></a>
 <a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Zapisz</button></a>
