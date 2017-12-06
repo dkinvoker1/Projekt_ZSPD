@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 ZSPD/App_Data/ZSPD_DB.mdf
 ZSPD/App_Data/ZSPD_DB_log.ldf
+/ZSPD.Domain/Migrations
