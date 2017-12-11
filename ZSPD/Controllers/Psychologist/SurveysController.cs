@@ -89,8 +89,19 @@ namespace ZSPD.Controllers.Psychologist
 
         public ActionResult ModifyQuestions()
         {
-            return View();
+            var questions = _psychologistManager.GetOwnQuestions(User.Identity.GetUserId());
+
+            return View(questions);
         }
+
+        [HttpPost]
+        public ActionResult ModifyQuestions(Question question)
+        {
+            _psychologistManager.EditQuestion(question);
+
+            return RedirectToAction("ModifyQuestions");
+        }
+
 
 
         public ActionResult Manage()
@@ -162,7 +173,7 @@ namespace ZSPD.Controllers.Psychologist
         [HttpPost]
         public ActionResult AddQuestion(string question)
         {
-            _psychologistManager.AddQuestion(question);
+            _psychologistManager.AddQuestion(question, User.Identity.GetUserId());
 
             return View();
         }

@@ -11,6 +11,7 @@ namespace ZSPD.Domain.Managers
         List<Student> GetAllStudents();        
 
         List<Question> GetAllQuestions();
+        List<Question> GetOwnQuestions(string userId);
 
         List<Survey> GetAllSurveys();
         List<Survey> GetOwnSurveys(string userId);
@@ -21,10 +22,11 @@ namespace ZSPD.Domain.Managers
         // Update
         void AddOrUpdateRateQuestion(int? grade, string userId, int questionId);
         void EditSurvey(List<Question> questions, int surveyId);
+        void EditQuestion(Question question);
 
         // Add
         void AddSurvey(List<Question> questions, string authorId);
-        void AddQuestion(string question);
+        void AddQuestion(string question, string authorId);
 
         void AddSurveyToStudent(Survey survey, string studentId);
 

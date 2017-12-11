@@ -10,11 +10,12 @@ namespace ZSPD.Domain.Managers
     public class PsychologistManager : IPsychologistManager
     {
 		private ApplicationDbContext _context = new ApplicationDbContext();
-		public void AddQuestion(string question)
+		public void AddQuestion(string question, string authorId)
         {
             var newQuestion = new Question
             {
-                Content = question
+                Content = question,
+                Author = _context.Psychologists.First(x => x.Id == authorId)
             };
 
             _context.Questions.Add(newQuestion);
@@ -48,6 +49,11 @@ namespace ZSPD.Domain.Managers
         {
 			return _context.Questions.ToList();
 		}
+
+        List<Question> IPsychologistManager.GetOwnQuestions(string userId)
+        {
+            return _context.Questions.Where(x => x.Author.Id == userId).ToList();
+        }
 
         public List<Student> GetAllStudents()
         {
@@ -134,5 +140,11 @@ namespace ZSPD.Domain.Managers
             }
         }
 
+        public void EditQuestion(Question question)
+        {
+            var questionToChange = _context.Questions.FirstOrDefault(x => x.Id == question.Id);
+            questionToChange.Content = question.Content;
+            _context.SaveChanges();
+        }
     }
 }
