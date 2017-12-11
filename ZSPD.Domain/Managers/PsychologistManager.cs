@@ -17,17 +17,20 @@ namespace ZSPD.Domain.Managers
 
         public void AddSurvey(List<Question> questions, string authorId)
         {
-            var questionsToAdd = GetAllQuestions().Where(x => questions.Any(y => y.Id == x.Id)).ToList();
-
-            Survey newSurvey = new Survey
+            if (questions.Count > 0)
             {
-                Questions = questionsToAdd,
-                Author = _context.Psychologists.First(x => x.Id == authorId),
-                CreateDate = DateTime.Now
-            };
+                var questionsToAdd = GetAllQuestions().Where(x => questions.Any(y => y.Id == x.Id)).ToList();
 
-            _context.Surveys.Add(newSurvey);
-            _context.SaveChanges();
+                Survey newSurvey = new Survey
+                {
+                    Questions = questionsToAdd,
+                    Author = _context.Psychologists.First(x => x.Id == authorId),
+                    CreateDate = DateTime.Now
+                };
+
+                _context.Surveys.Add(newSurvey);
+                _context.SaveChanges();
+            }
         }
 
         public void AddSurveyToStudent(Survey survey, string studentId)
@@ -103,15 +106,25 @@ namespace ZSPD.Domain.Managers
         {
             var survey = _context.Surveys.FirstOrDefault(x => x.Id == surveyId);
 
-            var questionsToAdd = GetAllQuestions().Where(x => questions.Any(y => y.Id == x.Id)).ToList();
-
             if (survey != null)
             {
-                survey.Questions.Clear();
-                _context.SaveChanges();
+                if (questions.Count <= 0)
+                {
+                    RemoveSurvey(surveyId);
+                }
+                else
+                {
+                    var questionsToAdd = GetAllQuestions().Where(x => questions.Any(y => y.Id == x.Id)).ToList();
 
-                survey.Questions = questionsToAdd;
-                _context.SaveChanges();
+                    if (survey != null)
+                    {
+                        survey.Questions.Clear();
+                        _context.SaveChanges();
+
+                        survey.Questions = questionsToAdd;
+                        _context.SaveChanges();
+                    }
+                }
             }
         }
 

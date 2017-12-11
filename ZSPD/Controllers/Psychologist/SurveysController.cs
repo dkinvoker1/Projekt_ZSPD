@@ -6,10 +6,12 @@ using System.Web.Mvc;
 
 using ZSPD.Domain.Managers;
 using ZSPD.Domain.Models.EntityModels;
+using ZSPD.Domain.Models.EntityModels.Accounts;
 using ZSPD.Models;
 
 namespace ZSPD.Controllers.Psychologist
 {
+    [Authorize(Roles = Roles.Psychologist)]
     public class SurveysController : Controller
     {
         private IStudentManager _studentManager;
@@ -95,13 +97,17 @@ namespace ZSPD.Controllers.Psychologist
         {
             var surveys = _psychologistManager.GetOwnSurveys(User.Identity.GetUserId());
 
-
             return View(surveys);
         }
 
         public ActionResult RemoveSurvey(int surveyId)
         {
-            _psychologistManager.RemoveSurvey(surveyId);
+            var survey = _psychologistManager.GetSurvey(surveyId);
+
+            if (survey != null && survey.Author.Id == User.Identity.GetUserId())
+            {
+                _psychologistManager.RemoveSurvey(surveyId);
+            }
 
             return RedirectToAction("Manage");
         }
@@ -111,22 +117,28 @@ namespace ZSPD.Controllers.Psychologist
             var survey = _psychologistManager.GetSurvey(surveyId);
             var allQuestions = _psychologistManager.GetAllQuestions();
 
-            EditSurveyViewModel editVM = new EditSurveyViewModel()
+            if (survey != null && survey.Author.Id == User.Identity.GetUserId())
             {
-                Survey = survey,
-                Questions = new List<CreateSurveyViewModel>()
-            };
-
-            foreach (var question in allQuestions)
-            {
-                editVM.Questions.Add(new CreateSurveyViewModel
+                EditSurveyViewModel editVM = new EditSurveyViewModel()
                 {
-                    Question = question,
-                    AddToSurvey = survey.Questions.Any(x => x.Id == question.Id),
-                });
-            }
+                    Survey = survey,
+                    Questions = new List<CreateSurveyViewModel>()
+                };
 
-            return View(editVM);
+                foreach (var question in allQuestions)
+                {
+                    editVM.Questions.Add(new CreateSurveyViewModel
+                    {
+                        Question = question,
+                        AddToSurvey = survey.Questions.Any(x => x.Id == question.Id),
+                    });
+                }
+                return View(editVM);
+            }
+            else
+            {
+                return RedirectToAction("Psychologist", "Home");
+            }
         }
 
         [HttpPost]
@@ -138,7 +150,7 @@ namespace ZSPD.Controllers.Psychologist
 
             _psychologistManager.EditSurvey(newQuestions, editVM.Survey.Id);
 
-            return RedirectToAction("Psychologist", "Home");
+            return RedirectToAction("Manage");
         }
         //...
     }
