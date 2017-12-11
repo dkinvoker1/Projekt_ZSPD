@@ -206,6 +206,8 @@
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\QuestionRate.cs" />
+    <Compile Include="Models\RateQuestionViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\SurveyViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -264,6 +266,7 @@
     <Content Include="Views\Surveys\RateQuestions.cshtml" />
     <Content Include="Views\Surveys\Manage.cshtml" />
     <Content Include="Views\Surveys\Edit.cshtml" />
+    <Content Include="Views\Surveys\RateQuestions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
