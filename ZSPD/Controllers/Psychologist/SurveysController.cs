@@ -106,9 +106,39 @@ namespace ZSPD.Controllers.Psychologist
             return RedirectToAction("Manage");
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(int surveyId)
         {
-            return View();
+            var survey = _psychologistManager.GetSurvey(surveyId);
+            var allQuestions = _psychologistManager.GetAllQuestions();
+
+            EditSurveyViewModel editVM = new EditSurveyViewModel()
+            {
+                Survey = survey,
+                Questions = new List<CreateSurveyViewModel>()
+            };
+
+            foreach (var question in allQuestions)
+            {
+                editVM.Questions.Add(new CreateSurveyViewModel
+                {
+                    Question = question,
+                    AddToSurvey = survey.Questions.Any(x => x.Id == question.Id),
+                });
+            }
+
+            return View(editVM);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EditSurveyViewModel editVM)
+        {
+            var newQuestions = editVM.Questions.Where(x => x.AddToSurvey == true)
+                                                .Select(x => x.Question)
+                                                .ToList();
+
+            _psychologistManager.EditSurvey(newQuestions, editVM.Survey.Id);
+
+            return RedirectToAction("Psychologist", "Home");
         }
         //...
     }

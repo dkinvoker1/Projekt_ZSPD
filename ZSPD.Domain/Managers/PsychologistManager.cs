@@ -99,5 +99,21 @@ namespace ZSPD.Domain.Managers
             }
         }
 
+        public void EditSurvey(List<Question> questions, int surveyId)
+        {
+            var survey = _context.Surveys.FirstOrDefault(x => x.Id == surveyId);
+
+            var questionsToAdd = GetAllQuestions().Where(x => questions.Any(y => y.Id == x.Id)).ToList();
+
+            if (survey != null)
+            {
+                survey.Questions.Clear();
+                _context.SaveChanges();
+
+                survey.Questions = questionsToAdd;
+                _context.SaveChanges();
+            }
+        }
+
     }
 }

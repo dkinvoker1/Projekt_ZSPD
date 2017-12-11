@@ -18,9 +18,8 @@
             i = i + 1;
         }
 
-            <button class="col-lg-2 btn-info btn" onclick="location.href='Edit';">Edytuj</button>
-
-             @Html.ActionLink("Usuń", "RemoveSurvey", new { surveyId = survey.Id }, new { @class = "col-lg-2 btn-info btn" })
+            @Html.ActionLink("Edytuj", "Edit", new { surveyId = survey.Id }, new { @class = "col-lg-2 btn-info btn" })
+            @Html.ActionLink("Usuń", "RemoveSurvey", new { surveyId = survey.Id }, new { @class = "col-lg-2 btn-info btn" })
              
         <br />
         <br />
@@ -30,4 +29,4 @@
 
 
 <a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Wstecz</button></a>
-<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Zapisz</button></a>
+@*<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Zapisz</button></a>*@

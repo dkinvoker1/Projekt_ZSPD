@@ -1,5 +1,4 @@
-﻿
-using ZSPD.Domain.Models.EntityModels;
+﻿using ZSPD.Domain.Models.EntityModels;
 
 namespace ZSPD.Models
 {

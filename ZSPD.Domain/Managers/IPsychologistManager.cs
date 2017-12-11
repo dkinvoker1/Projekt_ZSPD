@@ -20,6 +20,7 @@ namespace ZSPD.Domain.Managers
 
         // Update
         void AddOrUpdateRateQuestion(int? grade, string userId, int questionId);
+        void EditSurvey(List<Question> questions, int surveyId);
 
         // Add
         void AddSurvey(List<Question> questions, string authorId);
