@@ -1,7 +1,4 @@
 ﻿@model IEnumerable<ZSPD.Domain.Models.EntityModels.Survey>
-@{
-    int i = 1;
-}
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
 
@@ -12,11 +9,8 @@
     @foreach(var survey in Model)
     {
         
-            <label>Ankieta @i</label>
+            <label>Ankieta @survey.Id</label>
 
-        {
-            i = i + 1;
-        }
 
             @Html.ActionLink("Edytuj", "Edit", new { surveyId = survey.Id }, new { @class = "col-lg-2 btn-info btn" })
             @Html.ActionLink("Usuń", "RemoveSurvey", new { surveyId = survey.Id }, new { @class = "col-lg-2 btn-info btn" })
