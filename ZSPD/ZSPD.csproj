@@ -197,14 +197,19 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Psychologist\StudentsController.cs" />
     <Compile Include="Controllers\Psychologist\SurveysController.cs" />
+    <Compile Include="Controllers\Student\ChooseSurveyController.cs" />
     <Compile Include="Controllers\Student\FillSurveyController.cs" />
+    <Compile Include="Controllers\Student\SurveyController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\QuestionRate.cs" />
+    <Compile Include="Models\RateQuestionViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\SurveyViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -257,12 +262,17 @@
     <Content Include="Views\Home\Psychologist.cshtml" />
     <Content Include="Views\Surveys\Create.cshtml" />
     <Content Include="Views\Surveys\Assign.cshtml" />
+    <Content Include="Views\Surveys\ModifyQuestions.cshtml" />
+    <Content Include="Views\Surveys\RateQuestions.cshtml" />
+    <Content Include="Views\Surveys\Manage.cshtml" />
+    <Content Include="Views\Surveys\Edit.cshtml" />
+    <Content Include="Views\Surveys\RateQuestions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ChooseSurvey\" />
     <Folder Include="Views\FillSurvey\" />
     <Folder Include="Views\Students\" />
-    <Folder Include="Views\Surveys\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
