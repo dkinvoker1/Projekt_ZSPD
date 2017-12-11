@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using Microsoft.AspNet.Identity;
+
+using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
 
 using ZSPD.Domain.Managers;
 using ZSPD.Domain.Models.EntityModels;
@@ -32,7 +34,7 @@ namespace ZSPD.Controllers.Psychologist
 
 		public ActionResult RateQuestions()
 		{
-			string userId = "442bc1df-fde0-4e56-a737-e6df6dc2dac5";
+			string userId = User.Identity.GetUserId();
 
 			var reatedQuestions = _psychologistManager.GetPsychologist(userId).QuestionsGrades.ToList();
 			var listofAllQuestions = _psychologistManager.GetAllQuestions();
@@ -55,8 +57,8 @@ namespace ZSPD.Controllers.Psychologist
 
 		public JsonResult SaveRateForQuestion(int? grade, int questionId, string userId)
 		{
-			userId = "442bc1df-fde0-4e56-a737-e6df6dc2dac5";
-			_psychologistManager.AddOrUpdateRateQuestion(grade, userId, questionId);
+			userId = User.Identity.GetUserId();
+            _psychologistManager.AddOrUpdateRateQuestion(grade, userId, questionId);
 			string message = "success";
 			return Json(message, JsonRequestBehavior.AllowGet);
 		}
