@@ -14,21 +14,23 @@ namespace ZSPD.Domain.Managers
 
         List<Survey> GetAllSurveys();
         List<Survey> GetOwnSurveys(string userId);
-        List<Survey> GetSurvey(string surveyId);
+        Survey GetSurvey(int surveyId);
 
         Psychologist GetPsychologist(string userId);
 
         // Update
-        void RateQuestions(List<Grade> grades);
+        void AddOrUpdateRateQuestion(int? grade, string userId, int questionId);
 
         // Add
-        void AddSurvey(Survey survey);
+        void AddSurvey(List<Question> questions, string authorId);
         void AddQuestion(Question question);
 
         void AddSurveyToStudent(Survey survey, string studentId);
 
+        // Remove
+        void RemoveSurvey(int surveyId);
+
 		//...
 
-		void AddOrUpdateRateQuestion(int? grade, string userId, int questionId);
     }
 }

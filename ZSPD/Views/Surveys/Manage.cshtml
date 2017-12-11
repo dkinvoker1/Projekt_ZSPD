@@ -1,18 +1,22 @@
-﻿<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+﻿@model IEnumerable<ZSPD.Domain.Models.EntityModels.Survey>
+@{
+    int i = 1;
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
 
 
 <div class="panel panel-primary">
     <div class="panel-heading">Stwórz ankietę</div>
 </div>
-
-    @for (int i = 1; i <= 10; i++)
+    @foreach(var survey in Model)
     {
         
-            <label>Ankieta @i</label>
+            <label>Ankieta @i++</label>
+
             <button class="col-lg-2 btn-info btn" onclick="location.href='Edit';">Edytuj</button>
-            <button class="col-lg-2 btn-info btn">Usuń</button>
-        
+
+             @Html.ActionLink("Usuń", "Remove", new { id= survey.Id }, new { @class = "col-lg-2 btn-info btn" })
             
         <br />
         <br />

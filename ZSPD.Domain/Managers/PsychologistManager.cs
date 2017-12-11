@@ -15,9 +15,19 @@ namespace ZSPD.Domain.Managers
             throw new NotImplementedException();
         }
 
-        public void AddSurvey(Survey survey)
+        public void AddSurvey(List<Question> questions, string authorId)
         {
-            throw new NotImplementedException();
+            var questionsToAdd = GetAllQuestions().Where(x => questions.Any(y => y.Id == x.Id)).ToList();
+
+            Survey newSurvey = new Survey
+            {
+                Questions = questionsToAdd,
+                Author = _context.Psychologists.First(x => x.Id == authorId),
+                CreateDate = DateTime.Now
+            };
+
+            _context.Surveys.Add(newSurvey);
+            _context.SaveChanges();
         }
 
         public void AddSurveyToStudent(Survey survey, string studentId)
@@ -37,12 +47,12 @@ namespace ZSPD.Domain.Managers
 
         public List<Survey> GetAllSurveys()
         {
-            throw new NotImplementedException();
+            return _context.Surveys.ToList();
         }
 
         public List<Survey> GetOwnSurveys(string userId)
         {
-            throw new NotImplementedException();
+            return _context.Surveys.Where(x => x.Author.Id == userId).ToList();
         }
 
         public Psychologist GetPsychologist(string userId)
@@ -51,15 +61,11 @@ namespace ZSPD.Domain.Managers
 
 		}
 
-        public List<Survey> GetSurvey(string surveyId)
+        public Survey GetSurvey(int surveyId)
         {
-            throw new NotImplementedException();
+            return _context.Surveys.FirstOrDefault(x => x.Id == surveyId);
         }
 
-        public void RateQuestions(List<Grade> grades)
-        {
-            throw new NotImplementedException();
-        }
 
 		public void AddOrUpdateRateQuestion(int? grade, string userId, int questionId)
 		{
@@ -82,5 +88,16 @@ namespace ZSPD.Domain.Managers
 			_context.SaveChanges();
 
 		}
-	}
+
+        public void RemoveSurvey(int surveyId)
+        {
+            var survey = _context.Surveys.FirstOrDefault(x => x.Id == surveyId);
+            if (survey != null)
+            {
+                _context.Surveys.Remove(survey);
+                _context.SaveChanges();
+            }
+        }
+
+    }
 }

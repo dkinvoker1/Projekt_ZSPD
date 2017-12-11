@@ -23,7 +23,29 @@ namespace ZSPD.Controllers.Psychologist
 
         public ActionResult Create()
         {
-            return View();
+            List<CreateSurveyViewModel> questions = new List<CreateSurveyViewModel>();
+            var allQuestions = _psychologistManager.GetAllQuestions();
+
+            foreach (var question in allQuestions)
+            {
+                questions.Add(new CreateSurveyViewModel
+                {
+                    Question = question,
+                    AddToSurvey = false
+                });
+            }
+
+            return View(questions);
+        }
+
+        [HttpPost]
+        public ActionResult Create(List<CreateSurveyViewModel> questions)
+        {
+            var questionsToAdd = questions.Where(x => x.AddToSurvey == true).Select(x => x.Question).ToList();
+
+            _psychologistManager.AddSurvey(questionsToAdd, User.Identity.GetUserId());
+
+            return RedirectToAction("Psychologist","Home");
         }
 
         public ActionResult Assign()
@@ -71,8 +93,19 @@ namespace ZSPD.Controllers.Psychologist
 
         public ActionResult Manage()
         {
-            return View();
+            var surveys = _psychologistManager.GetOwnSurveys(User.Identity.GetUserId());
+
+
+            return View(surveys);
         }
+
+        public ActionResult RemoveSurvey(int surveyId)
+        {
+            _psychologistManager.RemoveSurvey(surveyId);
+
+            return RedirectToAction("Manage");
+        }
+
         public ActionResult Edit()
         {
             return View();
