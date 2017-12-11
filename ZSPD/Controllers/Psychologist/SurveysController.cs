@@ -153,5 +153,18 @@ namespace ZSPD.Controllers.Psychologist
             return RedirectToAction("Manage");
         }
         //...
+
+        public ActionResult AddQuestion()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddQuestion(string question)
+        {
+            _psychologistManager.AddQuestion(question);
+
+            return View();
+        }
     }
 }

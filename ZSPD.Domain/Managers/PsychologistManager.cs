@@ -10,9 +10,15 @@ namespace ZSPD.Domain.Managers
     public class PsychologistManager : IPsychologistManager
     {
 		private ApplicationDbContext _context = new ApplicationDbContext();
-		public void AddQuestion(Question question)
+		public void AddQuestion(string question)
         {
-            throw new NotImplementedException();
+            var newQuestion = new Question
+            {
+                Content = question
+            };
+
+            _context.Questions.Add(newQuestion);
+            _context.SaveChanges();
         }
 
         public void AddSurvey(List<Question> questions, string authorId)

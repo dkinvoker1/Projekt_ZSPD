@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "AddQuestion";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Dodaj pytanie</div>
+</div>
+
+@using (Html.BeginForm("AddQuestion"))
+{
+    <div class="form-group">
+        <input class="form-control" id="question" placeholder="Treść pytania" name="question">
+    </div>
+    <input type="submit"  class="col-lg-2 btn-info btn" value="Dodaj"/>
+}
+
+<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Wstecz</button></a>
+
+

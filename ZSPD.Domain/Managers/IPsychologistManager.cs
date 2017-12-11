@@ -24,7 +24,7 @@ namespace ZSPD.Domain.Managers
 
         // Add
         void AddSurvey(List<Question> questions, string authorId);
-        void AddQuestion(Question question);
+        void AddQuestion(string question);
 
         void AddSurveyToStudent(Survey survey, string studentId);
 
