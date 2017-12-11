@@ -32,7 +32,7 @@ namespace ZSPD.Controllers.Psychologist
 
 		public ActionResult RateQuestions()
 		{
-			string userId = "d3166f19-a28f-40d8-9190-145d9ce66262";
+			string userId = "442bc1df-fde0-4e56-a737-e6df6dc2dac5";
 
 			var reatedQuestions = _psychologistManager.GetPsychologist(userId).QuestionsGrades.ToList();
 			var listofAllQuestions = _psychologistManager.GetAllQuestions();
@@ -55,12 +55,10 @@ namespace ZSPD.Controllers.Psychologist
 
 		public JsonResult SaveRateForQuestion(int? grade, int questionId, string userId)
 		{
-			userId = "d3166f19-a28f-40d8-9190-145d9ce66262";
+			userId = "442bc1df-fde0-4e56-a737-e6df6dc2dac5";
 			_psychologistManager.AddOrUpdateRateQuestion(grade, userId, questionId);
 			string message = "success";
 			return Json(message, JsonRequestBehavior.AllowGet);
-		}
-			//...
 		}
 
         public ActionResult ModifyQuestions()
@@ -68,10 +66,6 @@ namespace ZSPD.Controllers.Psychologist
             return View();
         }
 
-        public ActionResult RateQuestions()
-        {
-            return View();
-        }
 
         public ActionResult Manage()
         {
