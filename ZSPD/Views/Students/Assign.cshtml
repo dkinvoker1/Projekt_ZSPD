@@ -1,0 +1,55 @@
+﻿@model ZSPD.Models.AssignSurveyToStudentVM
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Przypisz ankietę</div>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Assign"))
+    {
+        <div class="col-lg-6">
+                @for (int i = 0; i < Model.SurveysToAssign.Count; i++)
+                {
+                    <div class="radio">
+                        @Html.HiddenFor(model => model.SurveysToAssign[i].Id)
+                        @Html.RadioButtonFor(model => model.SelectedSurveyId, Model.SurveysToAssign[i].Id)
+                        <span>Ankieta @Model.SurveysToAssign[i].Id</span>
+                    </div>
+                }
+        </div>
+        <div class="col-lg-6">
+                @for (int i = 0; i < Model.StudentsToAssign.Count; i++)
+                {
+                    var student = Model.StudentsToAssign[i].Student;
+                    <div class="checkbox">
+                        @Html.HiddenFor(model => model.StudentsToAssign[i].Student.Id)
+                        @Html.CheckBoxFor(model => model.StudentsToAssign[i].ToAssign)
+                        @Html.LabelFor(model => model.StudentsToAssign[i].Student.UserName, student.UserName)
+                        @if (student.ActiveSurvey != null)
+                        {
+                            <span>Przypisana ankieta: Ankieta @student.ActiveSurvey.Id</span>
+
+                            if (student.SurveyIsStarted)
+                            {
+                                <span> Status: Rozpoczęta</span>
+                            }
+                            else
+                            {
+                                <span> Status: Nierozpoczęta</span>
+                            }
+                        }
+                        else
+                        {
+                            <span>Brak przypisanych ankiet</span>
+                        }
+                    </div>
+                }
+        </div>
+       <input type="submit" value="Zapisz" class="col-lg-2 btn-info btn" />
+    }
+</div>
+<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Wstecz</button></a>
+

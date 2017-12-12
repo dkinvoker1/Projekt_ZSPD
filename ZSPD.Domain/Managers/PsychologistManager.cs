@@ -40,9 +40,12 @@ namespace ZSPD.Domain.Managers
             }
         }
 
-        public void AddSurveyToStudent(Survey survey, string studentId)
+        public void AddSurveyToStudent(int surveyId, string studentId)
         {
-            throw new NotImplementedException();
+            var surveyToAdd = this.GetSurvey(surveyId);
+
+            _context.Students.First(x => x.Id == studentId).ActiveSurvey = surveyToAdd;
+            _context.SaveChanges();
         }
 
         public List<Question> GetAllQuestions()
@@ -57,7 +60,7 @@ namespace ZSPD.Domain.Managers
 
         public List<Student> GetAllStudents()
         {
-            throw new NotImplementedException();
+            return _context.Students.ToList();
         }
 
         public List<Survey> GetAllSurveys()
@@ -109,6 +112,7 @@ namespace ZSPD.Domain.Managers
             var survey = _context.Surveys.FirstOrDefault(x => x.Id == surveyId);
             if (survey != null)
             {
+                _context.Surveys.Attach(survey);
                 _context.Surveys.Remove(survey);
                 _context.SaveChanges();
             }
@@ -144,6 +148,13 @@ namespace ZSPD.Domain.Managers
         {
             var questionToChange = _context.Questions.FirstOrDefault(x => x.Id == question.Id);
             questionToChange.Content = question.Content;
+            _context.SaveChanges();
+        }
+
+        public void RemoveQuestion(Question question)
+        {
+            _context.Questions.Attach(question);
+            _context.Questions.Remove(question);
             _context.SaveChanges();
         }
     }

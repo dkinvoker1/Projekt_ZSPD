@@ -18,6 +18,11 @@
             </div>
             <input type="submit" class="col-lg-2 btn-info btn" value="Zapisz"/>
         }
+        using (Html.BeginForm("RemoveQuestion", "Surveys"))
+        {
+                <input class="form-control" id="id" value="@Model[i].Id" name="id" type="hidden">
+            <input type="submit" class="col-lg-2 btn-info btn" value="Usuń" />
+        }
     }
 <br />
 <br />

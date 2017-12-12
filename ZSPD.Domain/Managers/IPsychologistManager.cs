@@ -28,10 +28,11 @@ namespace ZSPD.Domain.Managers
         void AddSurvey(List<Question> questions, string authorId);
         void AddQuestion(string question, string authorId);
 
-        void AddSurveyToStudent(Survey survey, string studentId);
+        void AddSurveyToStudent(int surveyId, string studentId);
 
         // Remove
         void RemoveSurvey(int surveyId);
+        void RemoveQuestion(Question question);
 
 		//...
 

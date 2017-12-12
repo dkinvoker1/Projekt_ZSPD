@@ -50,12 +50,6 @@ namespace ZSPD.Controllers.Psychologist
             return RedirectToAction("Psychologist","Home");
         }
 
-        public ActionResult Assign()
-        {
-            return View();
-        }
-
-
 		public ActionResult RateQuestions()
 		{
 			string userId = User.Identity.GetUserId();
@@ -98,6 +92,15 @@ namespace ZSPD.Controllers.Psychologist
         public ActionResult ModifyQuestions(Question question)
         {
             _psychologistManager.EditQuestion(question);
+
+            return RedirectToAction("ModifyQuestions");
+        }
+
+
+        [HttpPost]
+        public ActionResult RemoveQuestion(Question question)
+        {
+            _psychologistManager.RemoveQuestion(question);
 
             return RedirectToAction("ModifyQuestions");
         }
