@@ -1,28 +1,20 @@
-﻿<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-
-
+﻿@model ZSPD.Models.EditSurveyViewModel
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
 <div class="panel panel-primary">
     <div class="panel-heading">Edytuj ankietę</div>
 </div>
-<form>
-    @for (int i = 1; i < 50; i++)
+@using (Html.BeginForm("Edit", "Surveys"))
+{
+    @Html.HiddenFor(model => model.Survey.Id);
+    for (int i = 0; i < Model.Questions.Count(); i++)
     {
         <div class="checkbox">
-            @if (i <= 30)
-            {
-                <label><input type="checkbox" checked="checked">Pytanie @i</label>
-            }
-            else
-            {
-                <label><input type="checkbox" value="">Pytanie @i</label>
-            }
-            
+            @Html.HiddenFor(model => model.Questions[i].Question.Id)
+            @Html.CheckBoxFor(model => model.Questions[i].AddToSurvey)
+            @Html.LabelFor(model => model.Questions[i].Question.Content, Model.Questions[i].Question.Content)
         </div>
     }
-
-
-
-</form>
+    <input type="submit" class="col-lg-2 btn-info btn" value="Zapisz" />
+}
 <a href="~/Surveys/Manage"><button class="col-lg-2 btn-info btn">Wstecz</button></a>
-<a href="~/Surveys/Manage"><button class="col-lg-2 btn-info btn">Zapisz</button></a>

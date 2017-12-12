@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ZSPD.Domain.Models;
 using ZSPD.Domain.Models.EntityModels;
+using ZSPD.Domain.Models.EntityModels.Accounts;
 
 namespace ZSPD.Controllers
 {
@@ -12,6 +13,14 @@ namespace ZSPD.Controllers
     {
         public ActionResult Index()
         {
+            if(!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            else if(User.IsInRole(Roles.Psychologist))
+            {
+                return RedirectToAction("Psychologist");
+            }
             return View();
         }
 

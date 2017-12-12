@@ -127,9 +127,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Diagrams\Database\Diagram.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Diagram.dbml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Managers\IdentityManagers\ApplicationSignInManager.cs" />
     <Compile Include="Managers\IdentityManagers\ApplicationUserManager.cs" />
@@ -137,6 +137,10 @@
     <Compile Include="Managers\IStudentManager.cs" />
     <Compile Include="Managers\PsychologistManager.cs" />
     <Compile Include="Managers\StudentManager.cs" />
+    <Compile Include="Migrations\201712112144098_new.cs" />
+    <Compile Include="Migrations\201712112144098_new.Designer.cs">
+      <DependentUpon>201712112144098_new.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\EntityModels\Accounts\AppUser.cs" />
@@ -157,20 +161,18 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Diagrams\Database\Diagram.dbml">
+      <SubType>Designer</SubType>
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Diagram.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
+    </None>
+    <None Include="Diagrams\Database\Diagram.dbml.layout">
+      <DependentUpon>Diagram.dbml</DependentUpon>
     </None>
     <None Include="Diagrams\EntityModels\EntityModelsDiagram.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Diagrams\Database\Diagram.dbml.layout">
-      <DependentUpon>Diagram.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +189,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201712112144098_new.resx">
+      <DependentUpon>201712112144098_new.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

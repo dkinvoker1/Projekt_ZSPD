@@ -1,20 +1,20 @@
-﻿<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-
+﻿@model List<ZSPD.Models.CreateSurveyViewModel>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
 
 <div class="panel panel-primary">
     <div class="panel-heading">Stwórz ankietę</div>
 </div>
-<form>
-    @for (int i = 1; i < 50; i++)
+@using (Html.BeginForm("Create", "Surveys"))
+{
+    for (int i = 0; i < Model.Count(); i++)
     {
         <div class="checkbox">
-            <label><input type="checkbox" value="">Pytanie @i</label>
+            @Html.HiddenFor(model => model[i].Question.Id)
+            @Html.CheckBoxFor(model => model[i].AddToSurvey)
+            @Html.LabelFor(model => model[i].Question.Content, Model[i].Question.Content)
         </div>
-    }
-
-
-
-</form>
+        }
+    <input type="submit" class="col-lg-2 btn-info btn" value="Zapisz"/>
+}
 <a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Wstecz</button></a>
-<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Zapisz</button></a>
