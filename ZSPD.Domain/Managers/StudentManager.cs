@@ -16,7 +16,7 @@ namespace ZSPD.Domain.Managers
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                if( userID != null){
+                if(userID != null){
                     var survey = db.Students.FirstOrDefault(x => x.Id == userID).ActiveSurvey;
                     return survey;
                 }

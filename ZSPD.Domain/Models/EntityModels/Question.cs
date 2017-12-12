@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using ZSPD.Domain.Models.EntityModels.Accounts;
 
 namespace ZSPD.Domain.Models.EntityModels
 {
@@ -10,6 +11,7 @@ namespace ZSPD.Domain.Models.EntityModels
 
         public virtual ICollection<Grade> Grades { get; set; }
 
+        public virtual Psychologist Author { get; set; }
         //[NotMapped]
         //public double AverageRate { get; set; }
     }
