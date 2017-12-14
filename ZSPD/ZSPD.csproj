@@ -283,6 +283,8 @@
     <Content Include="Views\Surveys\RateQuestions.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Surveys\AddQuestion.cshtml" />
+    <Content Include="Views\Home\Users.cshtml" />
+    <Content Include="Views\Survey\FillSurvey.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,6 +18,7 @@ namespace ZSPD.Domain.Managers
             {
                 if(userID != null){
                     var survey = db.Students.FirstOrDefault(x => x.Id == userID).ActiveSurvey;
+                    survey.Questions = survey.Questions.ToList();
                     return survey;
                 }
                 return null;

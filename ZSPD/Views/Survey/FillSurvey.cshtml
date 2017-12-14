@@ -1,0 +1,39 @@
+﻿@model ZSPD.Models.SurveyViewModel
+@{
+    Layout = null;
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Wypełnij ankietę</div>
+</div>
+@if (Model.activeSurvey != null)
+            {
+                //foreach (var question in Model.activeSurvey.Questions)
+                using (Html.BeginForm("FillSurvey", "Survey"))
+                {
+                    var questions = Model.activeSurvey.Questions.ToList();
+                    for (int i = 0; i < questions.Count; i++)
+                    {
+        <div>
+                        @questions[i].Content
+                        @Html.RadioButtonFor(Model => Model.Answers[i].AnswerRate, 1)1
+                        @Html.RadioButtonFor(Model => Model.Answers[i].AnswerRate, 2)2
+                        @Html.RadioButtonFor(Model => Model.Answers[i].AnswerRate, 3)3
+                        @Html.RadioButtonFor(Model => Model.Answers[i].AnswerRate, 4)4
+                        @Html.RadioButtonFor(Model => Model.Answers[i].AnswerRate, 5)5
+
+        </div>
+            
+
+        }
+        <input type="submit" class="col-lg-2 btn-info btn" value="Zapisz" />
+    }
+
+
+
+}
+
+
+
