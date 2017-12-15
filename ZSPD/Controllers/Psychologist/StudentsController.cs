@@ -62,5 +62,22 @@ namespace ZSPD.Controllers.Psychologist
 
             return RedirectToAction("Assign");
         }
+
+
+        public ActionResult ShowStudents()
+        {
+            var students = _psychologistManager.GetAllStudents();
+
+            return View(students);
+        }
+
+
+        public ActionResult ShowStudentDetails(string userId)
+        {
+            var students = _psychologistManager.GetAllStudents();
+            var user = students.FirstOrDefault(x => x.Id == userId);
+
+            return View(user);
+        }
     }
 }

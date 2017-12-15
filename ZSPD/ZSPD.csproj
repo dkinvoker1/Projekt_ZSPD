@@ -285,6 +285,8 @@
     <Content Include="Views\Surveys\AddQuestion.cshtml" />
     <Content Include="Views\Home\Users.cshtml" />
     <Content Include="Views\Survey\FillSurvey.cshtml" />
+    <Content Include="Views\Students\ShowStudents.cshtml" />
+    <Content Include="Views\Students\ShowStudentDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
