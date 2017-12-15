@@ -13,7 +13,6 @@ namespace ZSPD.Domain.Managers
 
         void SaveAnswers(List<Answer> answers, string userID);
 
-
         //...
     }
 }

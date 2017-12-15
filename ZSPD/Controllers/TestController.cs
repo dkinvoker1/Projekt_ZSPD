@@ -198,17 +198,19 @@ namespace ZSPD.Controllers
 
             var survey = user.ActiveSurvey;
 
-            foreach(var question in survey.Questions)
-            {
-                user.Answers.Add(
-                    new Answer
-                    {
-                        Question = question,
-                        AnswerRate = _rand.Next(1,5),
-                        AnswerDate = DateTime.Now
-                    }
-                );
-            }
+
+            // Kod do starego modelu - już zbędny
+            //foreach(var question in survey.Questions)
+            //{
+            //    user.Answers.Add(
+            //        new Answer
+            //        {
+            //            Question = question,
+            //            AnswerRate = _rand.Next(1,5),
+            //            AnswerDate = DateTime.Now
+            //        }
+            //    );
+            //}
 
             _context.SaveChanges();
 

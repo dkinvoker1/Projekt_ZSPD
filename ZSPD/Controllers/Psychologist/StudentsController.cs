@@ -4,11 +4,12 @@ using System.Web.Mvc;
 
 using ZSPD.Domain.Managers;
 using ZSPD.Domain.Models.EntityModels;
+using ZSPD.Domain.Models.EntityModels.Accounts;
 using ZSPD.Models;
 
 namespace ZSPD.Controllers.Psychologist
 {
-
+    [Authorize(Roles = Roles.Psychologist)]
     public class StudentsController : Controller
     {
         private IStudentManager _studentManager;
