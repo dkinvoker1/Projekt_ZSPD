@@ -11,7 +11,6 @@ using ZSPD.Models;
 
 namespace ZSPD.Controllers.Psychologist
 {
-    [Authorize(Roles = Roles.Psychologist)]
     public class SurveysController : Controller
     {
         private IStudentManager _studentManager;
@@ -23,6 +22,8 @@ namespace ZSPD.Controllers.Psychologist
             _psychologistManager = psychologistManager;
 		}
 
+
+        [Authorize(Roles = Roles.Psychologist)]
         public ActionResult Create()
         {
             List<CreateSurveyViewModel> questions = new List<CreateSurveyViewModel>();
@@ -41,6 +42,7 @@ namespace ZSPD.Controllers.Psychologist
         }
 
         [HttpPost]
+        [Authorize(Roles = Roles.Psychologist)]
         public ActionResult Create(List<CreateSurveyViewModel> questions)
         {
             var questionsToAdd = questions.Where(x => x.AddToSurvey == true).Select(x => x.Question).ToList();
@@ -50,7 +52,9 @@ namespace ZSPD.Controllers.Psychologist
             return RedirectToAction("Psychologist","Home");
         }
 
-		public ActionResult RateQuestions()
+
+        [Authorize(Roles = Roles.Psychologist + " ," + Roles.Judge)]
+        public ActionResult RateQuestions()
 		{
 			string userId = User.Identity.GetUserId();
 
@@ -73,7 +77,8 @@ namespace ZSPD.Controllers.Psychologist
 			return View(model);
 		}
 
-		public JsonResult SaveRateForQuestion(int? grade, int questionId, string userId)
+        [Authorize(Roles = Roles.Psychologist + " ," + Roles.Judge)]
+        public JsonResult SaveRateForQuestion(int? grade, int questionId, string userId)
 		{
 			userId = User.Identity.GetUserId();
             _psychologistManager.AddOrUpdateRateQuestion(grade, userId, questionId);
@@ -81,6 +86,7 @@ namespace ZSPD.Controllers.Psychologist
 			return Json(message, JsonRequestBehavior.AllowGet);
 		}
 
+        [Authorize(Roles = Roles.Psychologist)]
         public ActionResult ModifyQuestions()
         {
             var questions = _psychologistManager.GetOwnQuestions(User.Identity.GetUserId());
@@ -89,6 +95,7 @@ namespace ZSPD.Controllers.Psychologist
         }
 
         [HttpPost]
+        [Authorize(Roles = Roles.Psychologist)]
         public ActionResult ModifyQuestions(Question question)
         {
             _psychologistManager.EditQuestion(question);
@@ -96,8 +103,8 @@ namespace ZSPD.Controllers.Psychologist
             return RedirectToAction("ModifyQuestions");
         }
 
-
         [HttpPost]
+        [Authorize(Roles = Roles.Psychologist)]
         public ActionResult RemoveQuestion(Question question)
         {
             _psychologistManager.RemoveQuestion(question);
@@ -105,8 +112,7 @@ namespace ZSPD.Controllers.Psychologist
             return RedirectToAction("ModifyQuestions");
         }
 
-
-
+        [Authorize(Roles = Roles.Psychologist)]
         public ActionResult Manage()
         {
             var surveys = _psychologistManager.GetOwnSurveys(User.Identity.GetUserId());
@@ -114,6 +120,7 @@ namespace ZSPD.Controllers.Psychologist
             return View(surveys);
         }
 
+        [Authorize(Roles = Roles.Psychologist)]
         public ActionResult RemoveSurvey(int surveyId)
         {
             var survey = _psychologistManager.GetSurvey(surveyId);
@@ -126,6 +133,7 @@ namespace ZSPD.Controllers.Psychologist
             return RedirectToAction("Manage");
         }
 
+        [Authorize(Roles = Roles.Psychologist)]
         public ActionResult Edit(int surveyId)
         {
             var survey = _psychologistManager.GetSurvey(surveyId);
@@ -156,6 +164,7 @@ namespace ZSPD.Controllers.Psychologist
         }
 
         [HttpPost]
+        [Authorize(Roles = Roles.Psychologist)]
         public ActionResult Edit(EditSurveyViewModel editVM)
         {
             var newQuestions = editVM.Questions.Where(x => x.AddToSurvey == true)
@@ -167,13 +176,14 @@ namespace ZSPD.Controllers.Psychologist
             return RedirectToAction("Manage");
         }
         //...
-
+        [Authorize(Roles = Roles.Psychologist)]
         public ActionResult AddQuestion()
         {
             return View();
         }
-
+ 
         [HttpPost]
+        [Authorize(Roles = Roles.Psychologist)]
         public ActionResult AddQuestion(string question)
         {
             _psychologistManager.AddQuestion(question, User.Identity.GetUserId());

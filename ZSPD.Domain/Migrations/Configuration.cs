@@ -25,6 +25,19 @@ namespace ZSPD.Domain.Migrations
             AddUsers(context);
             AddQuestions(context);
             AddPsychologists(context);
+
+
+            var userStore = new UserStore<AppUser>(context);
+            var userManager = new UserManager<AppUser>(userStore);
+            if (!(context.Users.Any(u => u.UserName == "admin")))
+            {
+                var userToInsert = new AppUser
+                {
+                    UserName = "admin",
+                };
+                userManager.Create(userToInsert, "superTajneHas³o123");
+                userManager.AddToRole(userToInsert.Id, Roles.Admin);
+            }
         }
 
         private void CreateRoles(ZSPD.Domain.Models.ApplicationDbContext context)
@@ -56,6 +69,15 @@ namespace ZSPD.Domain.Migrations
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole
                 {
                     Name = Roles.Judge
+                };
+                roleManager.Create(role);
+            }
+
+            if (!roleManager.RoleExists(Roles.Admin))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+                {
+                    Name = Roles.Admin,
                 };
                 roleManager.Create(role);
             }
@@ -122,7 +144,6 @@ namespace ZSPD.Domain.Migrations
                 userManager.Create(userToInsert, "testPsychologist!");
                 userManager.AddToRole(userToInsert.Id, Roles.Psychologist);
             }
-
             context.SaveChanges();
         }
         private void AddQuestions(ZSPD.Domain.Models.ApplicationDbContext context)
