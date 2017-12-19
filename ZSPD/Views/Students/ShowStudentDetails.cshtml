@@ -1,0 +1,51 @@
+﻿@model ZSPD.Domain.Models.EntityModels.Accounts.Student
+
+@{
+    ViewBag.Title = "ShouStudentDetails";
+}
+
+<h2>ShouStudentDetails</h2>
+
+<div>
+    <h4>@Model.UserName</h4>
+    <hr />
+    @foreach (var completedSurvey in Model.CompletedSurveys)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    Id Ankiety: @completedSurvey.SurveyId
+                </tr>
+                <tr>
+                    Autor ankiety: @completedSurvey.Survey.Author.UserName
+                </tr>
+                <tr>
+                    Data wykonania: @completedSurvey.DateOfComplete
+                </tr>
+            </thead>
+            <tr>
+                <th>
+                   Pytanie
+                </th>
+                <th>
+                    Odpowiedź
+                </th>
+            </tr>
+
+            @foreach (var item in completedSurvey.Answers)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Question.Content)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AnswerRate)
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    }
+</div>
+

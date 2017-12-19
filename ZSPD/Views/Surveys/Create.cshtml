@@ -1,20 +1,47 @@
-﻿<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+﻿@model List<ZSPD.Models.CreateSurveyViewModel>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
 
+@Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Stwórz ankietę" } })
+@using (Html.BeginForm("Create", "Surveys"))
+{
+    <table class="table">
+        <tr>
+            <th>
+                
+            </th>
+            <th>
+                Pytanie
+            </th>
+            <th>
+                Średnia ocena
+            </th>
+        </tr>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+        <tr>
+            @Html.HiddenFor(model => model[i].Question.Id)
 
-<div class="panel panel-primary">
-    <div class="panel-heading">Stwórz ankietę</div>
-</div>
-<form>
-    @for (int i = 1; i < 50; i++)
-    {
-        <div class="checkbox">
-            <label><input type="checkbox" value="">Pytanie @i</label>
-        </div>
-    }
+            <td>
+                @Html.CheckBoxFor(model => model[i].AddToSurvey)
+            </td>
+            <td>
+                @Html.LabelFor(model => model[i].Question.Content, Model[i].Question.Content)
+            </td>
+            <td>
+                @if (Model[i].Question.Grades.Count > 0)
+                {
+                    @Model[i].Question.Grades.ToList().Average(x => x.Value)
+                }
+                else
+                {
+                    <text>Brak ocen</text>
+}
+            </td>
+        </tr>
+        }
+    </table>
+        <input type="submit" class="col-lg-2 btn-info btn" value="Zapisz" />
+ }
 
-
-
-</form>
 <a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Wstecz</button></a>
-<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Zapisz</button></a>

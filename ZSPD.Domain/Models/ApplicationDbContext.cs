@@ -27,6 +27,8 @@ namespace ZSPD.Domain.Models
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Survey>().HasMany(x => x.Questions).WithMany();
+            modelBuilder.Entity<CompletedSurvey>().HasMany(x => x.Answers).WithRequired();
+
 
             modelBuilder.Entity<Psychologist>().ToTable("Psychologists");
             modelBuilder.Entity<Student>().ToTable("Users");

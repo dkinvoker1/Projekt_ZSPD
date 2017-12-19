@@ -7,10 +7,12 @@ using Microsoft.AspNet.Identity;
 using System.Web.Mvc;
 using ZSPD.Domain.Managers;
 using ZSPD.Models;
-
+using ZSPD.Domain.Models.EntityModels;
+using ZSPD.Domain.Models.EntityModels.Accounts;
 
 namespace ZSPD.Controllers.Student
 {
+    [Authorize(Roles = Roles.User)]
     public class SurveyController : Controller
     {
         private IStudentManager _studentManager;
@@ -33,11 +35,8 @@ namespace ZSPD.Controllers.Student
         [HttpPost]
         public ActionResult FillSurvey(SurveyViewModel SVM)
         {
-            var answers = SVM.Answers;
-            var user = User.Identity.GetUserId();
-
-            _studentManager.SaveAnswers(answers, user);
-            return RedirectToAction("Index", "Home");
+            _studentManager.SaveAnswers(SVM.Answers, User.Identity.GetUserId());
+            return RedirectToAction("Users", "Home");
         }
     }
 }

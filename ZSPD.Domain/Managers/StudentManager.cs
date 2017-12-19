@@ -16,8 +16,10 @@ namespace ZSPD.Domain.Managers
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                if( userID != null){
-                    var survey = db.Students.FirstOrDefault(x => x.Id == userID).ActiveSurvey;
+                var survey = db.Students.FirstOrDefault(x => x.Id == userID).ActiveSurvey;
+                if (survey != null)
+                {
+                    survey.Questions = survey.Questions.ToList();
                     return survey;
                 }
                 return null;
@@ -26,11 +28,30 @@ namespace ZSPD.Domain.Managers
 
         public void SaveAnswers(List<Answer> answers, string userID)
         {
+            var survey = GetActiveSurvey(userID);
+            var questions = survey.Questions.ToList();
+
+            for(int i = 0; i < questions.Count; i++)
+            {
+                answers[i].QuestionId = questions[i].Id;
+            }
+
+            var completedSurvey = new CompletedSurvey()
+            {
+                Answers = answers,
+                DateOfComplete = DateTime.Now,
+                SurveyId = survey.Id
+            };
+
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                if (answers != null && userID != null){
-                    db.Students.FirstOrDefault(x => x.Id == userID).Answers = answers;
-                    db.Students.FirstOrDefault(x => x.Id == userID).SurveyIsStarted = true;
+                var user = db.Students.FirstOrDefault(x => x.Id == userID);
+
+                if (user != null)
+                {
+                    user.CompletedSurveys.Add(completedSurvey);
+
+                    user.SurveyIsStarted = true;
                     db.SaveChanges();
                 }
             }
