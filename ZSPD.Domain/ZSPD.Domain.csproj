@@ -140,6 +140,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\EntityModels\Accounts\AppUser.cs" />
+    <Compile Include="Models\EntityModels\CompletedSurvey.cs" />
     <Compile Include="Models\EntityModels\Accounts\Roles.cs" />
     <Compile Include="Models\EntityModels\Answer.cs" />
     <Compile Include="Models\EntityModels\Accounts\Psychologist.cs" />

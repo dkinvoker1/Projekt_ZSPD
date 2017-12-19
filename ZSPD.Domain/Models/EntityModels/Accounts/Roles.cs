@@ -5,5 +5,7 @@
         public const string User = "User";
         public const string Psychologist = "Psychologist";
         public const string Judge = "Judge";
+
+        public const string Admin = "Administrator";
     }
 }

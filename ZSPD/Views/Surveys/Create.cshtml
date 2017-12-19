@@ -5,14 +5,43 @@
 @Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Stwórz ankietę" } })
 @using (Html.BeginForm("Create", "Surveys"))
 {
-    for (int i = 0; i < Model.Count(); i++)
-    {
-        <div class="checkbox">
+    <table class="table">
+        <tr>
+            <th>
+                
+            </th>
+            <th>
+                Pytanie
+            </th>
+            <th>
+                Średnia ocena
+            </th>
+        </tr>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+        <tr>
             @Html.HiddenFor(model => model[i].Question.Id)
-            @Html.CheckBoxFor(model => model[i].AddToSurvey)
-            @Html.LabelFor(model => model[i].Question.Content, Model[i].Question.Content)
-        </div>
-        }
-    <input type="submit" class="col-lg-2 btn-info btn" value="Zapisz"/>
+
+            <td>
+                @Html.CheckBoxFor(model => model[i].AddToSurvey)
+            </td>
+            <td>
+                @Html.LabelFor(model => model[i].Question.Content, Model[i].Question.Content)
+            </td>
+            <td>
+                @if (Model[i].Question.Grades.Count > 0)
+                {
+                    @Model[i].Question.Grades.ToList().Average(x => x.Value)
+                }
+                else
+                {
+                    <text>Brak ocen</text>
 }
+            </td>
+        </tr>
+        }
+    </table>
+        <input type="submit" class="col-lg-2 btn-info btn" value="Zapisz" />
+ }
+
 <a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Wstecz</button></a>

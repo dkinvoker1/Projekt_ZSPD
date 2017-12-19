@@ -94,31 +94,75 @@ namespace ZSPD.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            var registerVM = new RegisterViewModel();
+            if (User.IsInRole(Roles.Admin))
+            {
+                var registerVM = new RegisterViewModel();
+                return View(registerVM);
+            }
+            else
+            {
+                return RedirectToAction("ContactAdmin");
+            }
+        }
 
-            return View(registerVM);
+        [AllowAnonymous]
+        public ActionResult ContactAdmin()
+        {
+            return View();
         }
 
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = Roles.Admin)]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new Domain.Models.EntityModels.Accounts.Psychologist
+                AppUser user;
+
+                string role = "";
+                switch(model.SelectedRole)
                 {
-                    UserName = model.Email,
-                    Email = model.Email,
-                };
+                    case "Sędzia":
+                        role = Roles.Judge;
+                        user = new Domain.Models.EntityModels.Accounts.Psychologist
+                        {
+                            UserName = model.Username,
+                            Email = model.Email,
+                        };
+                        break;
+                    case "Psycholog":
+                        role = Roles.Psychologist;
+                        user = new Domain.Models.EntityModels.Accounts.Psychologist
+                        {
+                            UserName = model.Username,
+                            Email = model.Email,
+                        };
+                        break;
+                    case "Student":
+                        role = Roles.User;
+                        user = new Domain.Models.EntityModels.Accounts.Student
+                        {
+                            UserName = model.Username,
+                            Email = model.Email,
+                        };
+                        break;
+                    default:
+                        role = Roles.User;
+                        user = new Domain.Models.EntityModels.Accounts.Student
+                        {
+                            UserName = model.Username,
+                            Email = model.Email,
+                        };
+                        break;
+                }
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, Roles.Psychologist);
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await UserManager.AddToRoleAsync(user.Id, role);
 
                     return RedirectToAction("Index", "Home");
                 }
