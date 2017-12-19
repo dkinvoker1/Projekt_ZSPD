@@ -139,7 +139,7 @@ namespace ZSPD.Controllers.Psychologist
             }
             else
             {
-                ViewBag.Message = string.Format("Nie można pobrać wyników ankiet tego pacjenta, ponieważ nie uzupełnił on jeszcze żadnej ankiety");
+                ViewBag.Message = string.Format("Nie można pobrać wynikow ankiet tego pacjenta, ponieważ nie uzupełnił on jeszcze żadnej ankiety");
             }
 
             return View("ShowStudents", students);
