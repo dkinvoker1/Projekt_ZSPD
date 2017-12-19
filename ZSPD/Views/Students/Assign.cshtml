@@ -3,9 +3,7 @@
 
 
 
-<div class="panel panel-primary">
-    <div class="panel-heading">Przypisz ankietę</div>
-</div>
+@Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Przypisz ankietę" } })
 
 <div class="row">
     @using (Html.BeginForm("Assign"))

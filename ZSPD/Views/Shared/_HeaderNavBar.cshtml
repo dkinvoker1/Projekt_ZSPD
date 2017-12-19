@@ -1,0 +1,12 @@
+﻿<div class="panel panel-primary">
+    <div class="panel-heading">
+        @ViewBag.name
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="text-right">
+                <input type="submit" value="Wyloguj się" class="btn btn-default" />
+            </div>
+        }
+    </div>
+</div>
