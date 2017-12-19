@@ -62,6 +62,9 @@
     <Reference Include="FastMember.Signed, Version=1.0.0.9, Culture=neutral, PublicKeyToken=9e8f22703bef9a29, processorArchitecture=MSIL">
       <HintPath>..\packages\FastMember.Signed.1.1.0\lib\net40\FastMember.Signed.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -234,6 +237,7 @@
     <Compile Include="Models\AssignSurveys\AssignSurveyToStudentVM.cs" />
     <Compile Include="Models\CreateSurveyViewModel.cs" />
     <Compile Include="Models\EditSurveyViewModel.cs" />
+    <Compile Include="Models\ExcelModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\QuestionRate.cs" />
     <Compile Include="Models\RateQuestionViewModel.cs" />
@@ -311,6 +315,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\ChooseSurvey\" />
     <Folder Include="Views\FillSurvey\" />
+    <Folder Include="Views\Students\" />
+    <Folder Include="Views\Surveys\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
