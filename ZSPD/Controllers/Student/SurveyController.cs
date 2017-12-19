@@ -35,9 +35,17 @@ namespace ZSPD.Controllers.Student
         {
             var answers = SVM.Answers;
             var user = User.Identity.GetUserId();
+            var survey = _studentManager.GetActiveSurvey(user);
+            var questions = survey.Questions.ToList();
+            for (int i = 0; i < answers.Count; i++)
+            {
+                answers[i].AnswerDate = DateTime.Now;
+                answers[i].Survey = survey;
+                answers[i].Question = questions[i];
+            }
 
             _studentManager.SaveAnswers(answers, user);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Users", "Home");
         }
     }
 }

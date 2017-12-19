@@ -3,9 +3,7 @@
 
 
 
-<div class="panel panel-primary">
-    <div class="panel-heading">Stwórz ankietę</div>
-</div>
+@Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Zarządzaj ankietami" } })
     @foreach(var survey in Model)
     {
         

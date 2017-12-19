@@ -4,9 +4,7 @@
 }
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
-<div class="panel panel-primary">
-    <div class="panel-heading">Dodaj pytanie</div>
-</div>
+@Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Dodaj pytanie" } })
 
 @using (Html.BeginForm("AddQuestion"))
 {
