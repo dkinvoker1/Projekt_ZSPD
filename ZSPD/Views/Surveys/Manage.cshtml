@@ -1,0 +1,24 @@
+﻿@model IEnumerable<ZSPD.Domain.Models.EntityModels.Survey>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+
+@Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Zarządzaj ankietami" } })
+    @foreach(var survey in Model)
+    {
+        
+            <label>Ankieta @survey.Id</label>
+
+
+            @Html.ActionLink("Edytuj", "Edit", new { surveyId = survey.Id }, new { @class = "col-lg-2 btn-info btn" })
+            @Html.ActionLink("Usuń", "RemoveSurvey", new { surveyId = survey.Id }, new { @class = "col-lg-2 btn-info btn" })
+             
+        <br />
+        <br />
+    }
+
+
+
+
+<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Wstecz</button></a>
+@*<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Zapisz</button></a>*@

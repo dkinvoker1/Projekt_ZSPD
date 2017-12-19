@@ -1,0 +1,28 @@
+﻿@model List<ZSPD.Domain.Models.EntityModels.Question>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+@Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Edytuj pytania" } })
+
+
+
+    @for(int i = 0; i < Model.Count; i++)
+    {
+        using (Html.BeginForm("ModifyQuestions"))
+        {
+            <div class="form-group">
+                <input class="form-control" id="id" value="@Model[i].Id" name="id" type="hidden">
+                <input class="form-control" id="content"  value="@Model[i].Content" name="content">
+            </div>
+            <input type="submit" class="col-lg-2 btn-info btn" value="Zapisz"/>
+        }
+        using (Html.BeginForm("RemoveQuestion", "Surveys"))
+        {
+                <input class="form-control" id="id" value="@Model[i].Id" name="id" type="hidden">
+            <input type="submit" class="col-lg-2 btn-info btn" value="Usuń" />
+        }
+    }
+<br />
+<br />
+<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Wstecz</button></a>
+

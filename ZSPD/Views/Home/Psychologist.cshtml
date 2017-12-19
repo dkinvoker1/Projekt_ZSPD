@@ -2,16 +2,16 @@
 
 
 
-<div class="panel panel-primary">
-    <div class="panel-heading">Moduł psychologa</div>
-</div>
+@Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Moduł psychologa" } })
 <div class="row text-center" style="height:25vh;">
 
-    <a href="~/Surveys/Create"><button class="col-lg-2 btn-info btn" style="height:25vh;">Stwórz ankietę</button></a>
-    <a href="~/Surveys/Assign"><button class="col-lg-2 btn-info btn" style="height:25vh;">Przypisz ankietę</button> </a>
-    <a href="Surveys/ModifyQuestions"><button class="col-lg-2 btn-info btn" style="height:25vh;">Modyfikuj pytania</button> </a>
-    <a href="Surveys/RateQuestions"><button class="col-lg-2 btn-info btn" style="height:25vh;">Oceń pytania</button></a>
-    <a href="Surveys/Manage"><button class="col-lg-2 btn-info btn" style="height:25vh;">Zarządzanie ankietami</button></a>
-    <a href="Surveys/Rate"><button class="col-lg-2 btn-info btn" style="height:25vh;">Oceń ankiety</button></a>
+    <a href="~/Surveys/Create"><button class="col-lg-2 btn-info btn" style="height:25vh; margin-left:8vw;">Stwórz ankietę</button></a>
+    <a href="~/Students/Assign"><button class="col-lg-2 btn-info btn" style="height:25vh;">Przypisz ankietę</button> </a>
+    <a href="~/Surveys/ModifyQuestions"><button class="col-lg-2 btn-info btn" style="height:25vh;">Modyfikuj pytania</button> </a>
+    <a href="~/Surveys/AddQuestion"><button class="col-lg-2 btn-info btn" style="height:25vh;">Dodaj pytanie</button> </a>
+    <a href="~/Surveys/RateQuestions"><button class="col-lg-2 btn-info btn" style="height:25vh;">Oceń pytania</button></a>
+    <a href="~/Surveys/Manage"><button class="col-lg-2 btn-info btn" style="height:25vh;">Zarządzanie ankietami</button></a>
+    <a href="~/Surveys/Rate"><button class="col-lg-2 btn-info btn" style="height:25vh;">Oceń ankiety</button></a>
+    <a href="~/Students/ShowStudents"><button class="col-lg-2 btn-info btn" style="height:25vh;">Wyświetl wyniki</button></a>
 
 </div>

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ZSPD.Domain.Models.EntityModels.Accounts.Student>
+
+@{
+    ViewBag.Title = "ShowStudents";
+}
+
+<h2>ShowStudents</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            Aktualna ankieta
+        </th>
+        <th>
+            Data ostatniego wypełnienia ankiety
+        </th>
+        <th>
+            Liczba wypełnionych ankiet
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SurveyIsStarted)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActiveSurvey.Id)
+        </td>
+        <td>
+            @if(item.CompletedSurveys.LastOrDefault() != null)
+            {
+                @Html.DisplayFor(modelItem => item.CompletedSurveys.LastOrDefault().DateOfComplete)
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompletedSurveys.Count)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SurveyIsStarted)
+        </td>
+        <td>
+            @Html.ActionLink("Wyniki", "ShowStudentDetails", new { userId =item.Id }) | @Html.ActionLink("Excel", "ExcelResults", new { userId = item.Id })
+        </td>
+    </tr>
+}
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+</table>

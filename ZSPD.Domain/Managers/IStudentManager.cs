@@ -1,16 +1,18 @@
 ﻿using System.Collections.Generic;
 
-using ZSPD.Domain.Diagrams.Database;
 using ZSPD.Domain.Models.EntityModels.Accounts;
+using ZSPD.Domain.Models.EntityModels;
 
 namespace ZSPD.Domain.Managers
 {
     public interface IStudentManager
     {
-        Survey GetSurvey(string userId);
-        void SaveAnswers(List<Answer> answers);
+        
 
-        Student GetStudent(string userId);
+        Models.EntityModels.Survey GetActiveSurvey(string userID);
+
+        void SaveAnswers(List<Answer> answers, string userID);
+
         //...
     }
 }

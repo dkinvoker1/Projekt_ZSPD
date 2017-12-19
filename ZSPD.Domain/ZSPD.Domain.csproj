@@ -51,6 +51,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -127,9 +130,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Diagrams\Database\Diagram.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Diagram.dbml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Managers\IdentityManagers\ApplicationSignInManager.cs" />
     <Compile Include="Managers\IdentityManagers\ApplicationUserManager.cs" />
@@ -137,9 +140,14 @@
     <Compile Include="Managers\IStudentManager.cs" />
     <Compile Include="Managers\PsychologistManager.cs" />
     <Compile Include="Managers\StudentManager.cs" />
+    <Compile Include="Migrations\201712130928212_new.cs" />
+    <Compile Include="Migrations\201712130928212_new.Designer.cs">
+      <DependentUpon>201712130928212_new.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\EntityModels\Accounts\AppUser.cs" />
+    <Compile Include="Models\EntityModels\CompletedSurvey.cs" />
     <Compile Include="Models\EntityModels\Accounts\Roles.cs" />
     <Compile Include="Models\EntityModels\Answer.cs" />
     <Compile Include="Models\EntityModels\Accounts\Psychologist.cs" />
@@ -157,20 +165,18 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Diagrams\Database\Diagram.dbml">
+      <SubType>Designer</SubType>
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Diagram.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
+    </None>
+    <None Include="Diagrams\Database\Diagram.dbml.layout">
+      <DependentUpon>Diagram.dbml</DependentUpon>
     </None>
     <None Include="Diagrams\EntityModels\EntityModelsDiagram.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Diagrams\Database\Diagram.dbml.layout">
-      <DependentUpon>Diagram.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +193,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201712130928212_new.resx">
+      <DependentUpon>201712130928212_new.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
