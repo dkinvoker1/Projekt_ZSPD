@@ -1,0 +1,32 @@
+﻿<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+@Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Uzupełnij informacje o zadaniu" } })
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ChoseExerciseLevel</title>
+</head>
+<body>
+    <div class="text-center ">
+        <div class="form-group">
+            <label for="exerciseNumber">Wpisz numer wykonywanego zadania:</label>
+            <input type="text" class="form-control" id="exerciseNumber" style="width:30vw; margin-left:35vw;">
+        </div>
+        <div class="form-group">
+            <label for="correctness">Czy odpowiedziałeś poprawnie?</label>
+            <input type="text" class="form-control" id="correctness" style="width:30vw; margin-left:35vw;">
+        </div>
+        <button class="col-lg-2 btn-info btn col-lg-offset-5">Losuj kolejne zadanie</button>
+        <br /><br /><br />
+        <div class="panel panel-default col-lg-2 col-lg-offset-5" >
+            <div class="panel-body"  ></div>
+        </div>
+        <br /><br /><br />
+    </div>
+        <a href="~/Exercise/ChoseYourLevel" ><button class="col-lg-2 btn-info btn col-lg-offset-5">Wstecz</button></a>
+    
+</body>
+</html>

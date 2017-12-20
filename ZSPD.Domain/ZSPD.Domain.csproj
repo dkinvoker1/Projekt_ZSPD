@@ -140,9 +140,9 @@
     <Compile Include="Managers\IStudentManager.cs" />
     <Compile Include="Managers\PsychologistManager.cs" />
     <Compile Include="Managers\StudentManager.cs" />
-    <Compile Include="Migrations\201712130928212_new.cs" />
-    <Compile Include="Migrations\201712130928212_new.Designer.cs">
-      <DependentUpon>201712130928212_new.cs</DependentUpon>
+    <Compile Include="Migrations\201712200908545_asdf.cs" />
+    <Compile Include="Migrations\201712200908545_asdf.Designer.cs">
+      <DependentUpon>201712200908545_asdf.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -195,8 +195,8 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712130928212_new.resx">
-      <DependentUpon>201712130928212_new.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712200908545_asdf.resx">
+      <DependentUpon>201712200908545_asdf.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
