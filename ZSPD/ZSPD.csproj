@@ -227,6 +227,7 @@
     <Compile Include="Controllers\Psychologist\StudentsController.cs" />
     <Compile Include="Controllers\Psychologist\SurveysController.cs" />
     <Compile Include="Controllers\Student\ChooseSurveyController.cs" />
+    <Compile Include="Controllers\Student\ExerciseController.cs" />
     <Compile Include="Controllers\Student\FillSurveyController.cs" />
     <Compile Include="Controllers\Student\SurveyController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -310,13 +311,13 @@
     <Content Include="Views\Account\ContactAdmin.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
     <Content Include="Views\Shared\_HeaderNavBar.cshtml" />
+    <Content Include="Views\Exercise\ChoseYourLevel.cshtml" />
+    <Content Include="Views\Exercise\ChoseExerciseLevel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\ChooseSurvey\" />
     <Folder Include="Views\FillSurvey\" />
-    <Folder Include="Views\Students\" />
-    <Folder Include="Views\Surveys\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
