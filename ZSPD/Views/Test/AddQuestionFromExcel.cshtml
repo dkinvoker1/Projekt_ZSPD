@@ -1,0 +1,28 @@
+﻿<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "AddQuestion";
+}
+
+<h2>AddQuestion</h2>
+
+
+@using (Html.BeginForm("AddQuestionFromExcel", "Test", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="file">Nazwa pliku:</label>
+        <div class="col-md-5">
+            <input type="file" name="file" id="file" />
+
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-4"></div>
+        <div class="col-md-5">
+            <input type="submit" value="Dodaj" class="btn-ok" />
+        </div>
+    </div>
+
+}
+

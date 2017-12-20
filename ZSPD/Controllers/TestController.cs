@@ -2,7 +2,9 @@
 using OfficeOpenXml;
 using System;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 using ZSPD.Domain.Models;
@@ -41,30 +43,39 @@ namespace ZSPD.Controllers
             return RedirectToAction("ShowAllQuestions");
         }
 
+        
         [Authorize(Roles = Roles.Psychologist)]
-        public ActionResult AddQuestionFromExcel(string path)
+        public ActionResult AddQuestionFromExcel()
         {
-            var question = new Question();
-            var answer = new Answer();
-            string questionSTR;
-            int questionId;
-            DataTable table = ExcelModel.readExcel(path);
-            foreach (DataRow row in table.Rows)
-            {
-                if ((row.ItemArray[0].ToString()) == "")
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = Roles.Psychologist)]
+        public ActionResult AddQuestionFromExcel(HttpPostedFileBase file)
+        {
+            
+
+                ExcelPackage pckg = new ExcelPackage(file.InputStream);
+                var question = new Question();
+                string questionSTR;
+                DataTable table = ExcelModel.readExcel(pckg);
+                foreach (DataRow row in table.Rows)
                 {
-                    break;
-                }
-                if (row.ItemArray[0].ToString() != "")
-                {
-                    questionSTR = row.ItemArray[0].ToString();
-                    question.Content=questionSTR;
-                    _context.Questions.Add(question);
-                    _context.SaveChanges();
+                    if ((row.ItemArray[0].ToString()) == "")
+                    {
+                        break;
+                    }
+                    if (row.ItemArray[0].ToString() != "")
+                    {
+                        questionSTR = row.ItemArray[0].ToString();
+                        question.Content = questionSTR;
+                        _context.Questions.Add(question);
+                        _context.SaveChanges();
+
+                    }
 
                 }
-
-            }
             
             return RedirectToAction("ShowAllQuestions");
         }

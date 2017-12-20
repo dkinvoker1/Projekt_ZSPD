@@ -11,12 +11,9 @@ namespace ZSPD.Models
     public class ExcelModel
     {
   
-        public static DataTable readExcel(string path)
+        public static DataTable readExcel(ExcelPackage pck)
         {
-            
-            using (var pck = new OfficeOpenXml.ExcelPackage(new FileInfo(path)))
-            {
-                
+
                 ExcelWorksheet worksheet = pck.Workbook.Worksheets.First();
                 DataTable dt = new DataTable();
                 foreach (var header in worksheet.Cells[1, 1, 1, worksheet.Dimension.End.Column])
@@ -27,14 +24,16 @@ namespace ZSPD.Models
                 {
                     var row = worksheet.Cells[numRow, 1, numRow, worksheet.Dimension.End.Column];
                     var newRow = dt.NewRow();
-                    foreach (var cell in row)
-                    {
-                        newRow[cell.Start.Column - 1] = cell.Text;
-                    }
-                    dt.Rows.Add(newRow);
+               
+                for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
+                { 
+                   newRow[0] = worksheet.Cells[numRow, col].Text; 
+                    
                 }
-                return dt;
+                dt.Rows.Add(newRow);
             }
+                return dt;
+          
         }
     }
 }
