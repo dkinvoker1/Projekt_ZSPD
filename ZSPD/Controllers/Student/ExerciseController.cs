@@ -21,6 +21,12 @@ namespace ZSPD.Controllers.Student
         // GET: Exercise
         public ActionResult ChoseYourLevel()
         {
+            string userId = User.Identity.GetUserId();
+            if(_studentManager.SolvedAnyExercise(userId))
+            {
+                int exNumber = _studentManager.GetResolvedExerciseNumber(userId);
+                return RedirectToAction("ChoseExerciseLevel", "Exercise", new { exerc = exNumber });
+            }
             return View();
         }
 

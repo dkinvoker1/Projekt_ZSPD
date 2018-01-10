@@ -7,7 +7,7 @@ namespace ZSPD.Domain.Managers
 {
     public interface IStudentManager
     {
-        
+        bool SolvedAnyExercise(string userID);
 
         Models.EntityModels.Survey GetActiveSurvey(string userID);
 
@@ -19,5 +19,6 @@ namespace ZSPD.Domain.Managers
 
         int GetNextExcerciseNumber(int excerciseNumber, bool answer, string userID);
 
+        int GetResolvedExerciseNumber(string userID);
     }
 }

@@ -37,6 +37,32 @@ namespace ZSPD.Domain.Managers
             }
         }
 
+        public bool SolvedAnyExercise(string userID)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var user = db.Students.FirstOrDefault(x => x.Id == userID);
+                if(user != null && user.ProperlySolvedExcercises.Count > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public int GetResolvedExerciseNumber(string userID)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var user = db.Students.FirstOrDefault(x => x.Id == userID);
+                if (user != null && user.ProperlySolvedExcercises.Count > 0)
+                {
+                    return user.ProperlySolvedExcercises.Last().excerciseNumber;
+                }
+                return 0;
+            }
+        }
+
         public void SaveAnswers(List<Answer> answers, string userID)
         {
             var survey = GetActiveSurvey(userID);
