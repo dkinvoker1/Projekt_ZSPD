@@ -1,9 +1,7 @@
 ﻿@model ZSPD.Models.EditSurveyViewModel
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
-<div class="panel panel-primary">
-    <div class="panel-heading">Edytuj ankietę</div>
-</div>
+@Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Edytuj ankietę" } })
 @using (Html.BeginForm("Edit", "Surveys"))
 {
     @Html.HiddenFor(model => model.Survey.Id);

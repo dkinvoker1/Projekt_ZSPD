@@ -13,6 +13,12 @@ namespace ZSPD.Domain.Managers
 
         void SaveAnswers(List<Answer> answers, string userID);
 
+        void GetExcerciseOrder();
+
+        int GetStudentAdvacement(int advacement);
+
+        int GetNextExcerciseNumber(int excerciseNumber, bool answer);
+
         //...
     }
 }

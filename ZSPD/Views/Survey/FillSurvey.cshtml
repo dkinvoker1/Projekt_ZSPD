@@ -5,9 +5,7 @@
 
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
-<div class="panel panel-primary">
-    <div class="panel-heading">Wypełnij ankietę</div>
-</div>
+@Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Wypełnij ankietę" } })
 @if (Model.activeSurvey != null)
             {
                 //foreach (var question in Model.activeSurvey.Questions)

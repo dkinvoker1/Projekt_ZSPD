@@ -2,9 +2,7 @@
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
 
-<div class="panel panel-primary">
-    <div class="panel-heading">Stwórz ankietę</div>
-</div>
+@Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Stwórz ankietę" } })
 @using (Html.BeginForm("Create", "Surveys"))
 {
     <table class="table">
