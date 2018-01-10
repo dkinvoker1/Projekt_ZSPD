@@ -239,12 +239,14 @@
     <Compile Include="Models\CreateSurveyViewModel.cs" />
     <Compile Include="Models\EditSurveyViewModel.cs" />
     <Compile Include="Models\ExcelModel.cs" />
+    <Compile Include="Models\ExcerciseViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\QuestionRate.cs" />
     <Compile Include="Models\RateQuestionViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\AssignSurveys\StudentToAssign.cs" />
     <Compile Include="Models\AssignSurveys\SurveyToAssign.cs" />
+    <Compile Include="Models\StudentAdvancementViewModel.cs" />
     <Compile Include="Models\SurveyViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
