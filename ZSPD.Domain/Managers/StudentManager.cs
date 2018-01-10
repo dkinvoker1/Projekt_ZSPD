@@ -7,6 +7,7 @@ using System.IO;
 
 using ZSPD.Domain.Models;
 using System.Reflection;
+using System.Web;
 
 namespace ZSPD.Domain.Managers
 {
@@ -94,12 +95,22 @@ namespace ZSPD.Domain.Managers
 
         public void GetExcerciseOrder()
         {
+            // Wczytanie plików 
+            if (HttpContext.Current == null)
+            {
+                throw new NullReferenceException("Brak Http context!");
+            }
+
+            string mainPath = HttpContext.Current.Server.MapPath("~");
+            mainPath = Path.GetDirectoryName(mainPath); // Cofnięcie o 1 folder w drzewku
+            mainPath = Path.GetDirectoryName(mainPath);
+
             // wczytanie z pliku tekstowego wartosci dla nastepnikow
-            string poj = System.IO.File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"bin", "Lista_pojec.txt"));
+            string poj = System.IO.File.ReadAllText(String.Format(@"{0}\ZSPD.Domain\Resources\Lista_pojec.txt", mainPath));
             // wczytanie z pliku tekstowego wartosci dla poprzednikow
-            string poj1 = System.IO.File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", "Lista_pojec1.txt"));
+            string poj1 = System.IO.File.ReadAllText(String.Format(@"{0}\ZSPD.Domain\Resources\Lista_pojec1.txt", mainPath));
             // wczytanie z pliku tekstowego zadan dla odp pojec
-            string zad = System.IO.File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", "Lista_zadan.txt"));
+            string zad = System.IO.File.ReadAllText(String.Format(@"{0}\ZSPD.Domain\Resources\Lista_zadan.txt", mainPath));
 
             string[] roz = poj.Split(';');
             string[] split = poj1.Split(';');
