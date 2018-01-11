@@ -1,10 +1,8 @@
 ﻿<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
 
+@Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Moduł administratora" } })
 
-<div class="panel panel-primary">
-    <div class="panel-heading">Moduł administratora</div>
-</div>
 <div class="row text-center" style="height:25vh;">
     <a href="~/Account/Register"><button class="col-lg-2 btn-info btn" style="height:25vh;">Załóż konto</button></a>
 </div>
