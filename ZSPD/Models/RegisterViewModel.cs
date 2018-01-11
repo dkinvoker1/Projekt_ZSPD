@@ -16,14 +16,14 @@ namespace ZSPD.Models
         public string Username { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Hasło musi zawierać przynajmniej 4 znaki.", MinimumLength = 4)]
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Potwierdź hasło")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Wpisane hasło i potwierdzenie różnią się.")]
         public string ConfirmPassword { get; set; }
 
         public List<string> UserRoles
