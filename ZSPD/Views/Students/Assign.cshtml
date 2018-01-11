@@ -1,6 +1,6 @@
 ﻿@model ZSPD.Models.AssignSurveyToStudentVM
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-
+<link href="~/Content/OwnStyles.css" rel="stylesheet" />
 
 
 @Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Przypisz ankietę" } })
@@ -46,8 +46,13 @@
                     </div>
                 }
         </div>
-       <input type="submit" value="Zapisz" class="col-lg-2 btn-info btn" />
+        <div class="container centering-container">
+            <input type="submit" value="Zapisz" class="own-btn btn-info btn" />
+        </div>
+       
     }
 </div>
-<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Wstecz</button></a>
+<div class="container centering-container">
+    @Html.ActionLink("Wstecz","Psychologist","Home",null,new { @class= "own-btn btn-info btn" })
+</div>
 

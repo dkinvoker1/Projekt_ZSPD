@@ -9,6 +9,8 @@ namespace ZSPD.Domain.Models.EntityModels.Accounts
 
         public virtual ICollection<CompletedSurvey> CompletedSurveys { get; set; }
 
+        public virtual ICollection<Excercise> ProperlySolvedExcercises { get; set; }
+
         // ICollection<Survey> Surveys 
     }
 }

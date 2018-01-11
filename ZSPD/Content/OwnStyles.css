@@ -1,0 +1,15 @@
+﻿.menu-tiles {
+    width:15vw;
+    height:15vh;
+    margin-top:2vh;
+    line-height:15vh;
+    padding:0;
+}
+
+.own-btn {
+    width:15vw;
+}
+
+.centering-container{
+    text-align:center;
+}
