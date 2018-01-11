@@ -20,7 +20,7 @@ namespace ZSPD.Domain.Managers
 
         public StudentManager()
         {
-            GetExcerciseOrder();
+            GetExcerciseOrder();    // Czy potrzebujemy tego cały czas? Każde wywołanie StudentManager'a będzie wywołowało ten konstruktor
         }
 
         public Models.EntityModels.Survey GetActiveSurvey(string userID)

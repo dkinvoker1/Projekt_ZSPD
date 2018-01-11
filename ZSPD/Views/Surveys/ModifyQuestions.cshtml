@@ -1,12 +1,50 @@
 ﻿@model List<ZSPD.Domain.Models.EntityModels.Question>
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-
+<link href="~/Content/OwnStyles.css" rel="stylesheet" />
 
 @Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Edytuj pytania" } })
 
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Treść pytania</th>
+            <th>Zapisz</th>
+            <th>Usuń</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ZSPD.Domain.Models.EntityModels.Question question in Model)
+        {
+            <tr>
+                @using (Html.BeginForm("ModifyQuestions"))
+                {
+                    <td>
+                        <div class="form-group">
+                            <input class="form-control" id="id" value="@question.Id" name="id" type="hidden">
+                            <input class="form-control" id="content" value="@question.Content" name="content">
+                        </div>
+                    </td>
+                    <td>
+                        <input type="submit" class="own-btn btn-info btn" value="Zapisz" />
+                    </td>
+                }
+                    <td>
+                        @using (Html.BeginForm("RemoveQuestion", "Surveys"))
+                        {
+                        <input class="form-control" id="id" value="@question.Id" name="id" type="hidden">
+                        <input type="submit" class="own-btn btn-info btn" value="Usuń" />
+                        }
+                    </td>
+                
+            </tr>
+            
+        }
+
+    </tbody>
+</table>
 
 
-    @for(int i = 0; i < Model.Count; i++)
+    @*@for(int i = 0; i < Model.Count; i++)
     {
         using (Html.BeginForm("ModifyQuestions"))
         {
@@ -14,15 +52,15 @@
                 <input class="form-control" id="id" value="@Model[i].Id" name="id" type="hidden">
                 <input class="form-control" id="content"  value="@Model[i].Content" name="content">
             </div>
-            <input type="submit" class="col-lg-2 btn-info btn" value="Zapisz"/>
+            <input type="submit" class="own-btn btn-info btn" value="Zapisz"/>
         }
         using (Html.BeginForm("RemoveQuestion", "Surveys"))
         {
                 <input class="form-control" id="id" value="@Model[i].Id" name="id" type="hidden">
-            <input type="submit" class="col-lg-2 btn-info btn" value="Usuń" />
+            <input type="submit" class="own-btn btn-info btn" value="Usuń" />
         }
-    }
-<br />
-<br />
-<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Wstecz</button></a>
+    }*@
+<div class="container centering-container">
+    @Html.ActionLink("Wstecz", "Psychologist", "Home", null, new { @class = "own-btn btn-info btn" })
+</div>
 

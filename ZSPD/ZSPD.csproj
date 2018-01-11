@@ -228,7 +228,6 @@
     <Compile Include="Controllers\Psychologist\SurveysController.cs" />
     <Compile Include="Controllers\Student\ChooseSurveyController.cs" />
     <Compile Include="Controllers\Student\ExerciseController.cs" />
-    <Compile Include="Controllers\Student\FillSurveyController.cs" />
     <Compile Include="Controllers\Student\SurveyController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
@@ -253,6 +252,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\OwnStyles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

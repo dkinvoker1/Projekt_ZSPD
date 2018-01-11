@@ -1,9 +1,5 @@
-﻿
-@{
-    ViewBag.Title = "AddQuestion";
-}
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-
+﻿<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/OwnStyles.css" rel="stylesheet" />
 @Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Dodaj pytanie" } })
 
 @using (Html.BeginForm("AddQuestion"))
@@ -11,9 +7,12 @@
     <div class="form-group">
         <input class="form-control" id="question" placeholder="Treść pytania" name="question">
     </div>
-    <input type="submit"  class="col-lg-2 btn-info btn" value="Dodaj"/>
+    <div class="container centering-container">
+        <input type="submit" class="own-btn btn-info btn" value="Dodaj" />
+    </div>
+    
 }
 
-<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Wstecz</button></a>
-
-
+<div class="container centering-container">
+    @Html.ActionLink("Wstecz", "Psychologist", "Home", null, new { @class = "own-btn btn-info btn" })
+</div>
