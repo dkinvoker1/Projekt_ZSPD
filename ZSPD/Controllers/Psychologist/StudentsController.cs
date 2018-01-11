@@ -73,7 +73,6 @@ namespace ZSPD.Controllers.Psychologist
             return View(students);
         }
 
-
         public ActionResult ShowStudentDetails(string userId)
         {
             var students = _psychologistManager.GetAllStudents();

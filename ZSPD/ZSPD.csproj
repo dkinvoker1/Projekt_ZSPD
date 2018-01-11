@@ -227,7 +227,7 @@
     <Compile Include="Controllers\Psychologist\StudentsController.cs" />
     <Compile Include="Controllers\Psychologist\SurveysController.cs" />
     <Compile Include="Controllers\Student\ChooseSurveyController.cs" />
-    <Compile Include="Controllers\Student\FillSurveyController.cs" />
+    <Compile Include="Controllers\Student\ExerciseController.cs" />
     <Compile Include="Controllers\Student\SurveyController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
@@ -238,18 +238,21 @@
     <Compile Include="Models\CreateSurveyViewModel.cs" />
     <Compile Include="Models\EditSurveyViewModel.cs" />
     <Compile Include="Models\ExcelModel.cs" />
+    <Compile Include="Models\ExcerciseViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\QuestionRate.cs" />
     <Compile Include="Models\RateQuestionViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\AssignSurveys\StudentToAssign.cs" />
     <Compile Include="Models\AssignSurveys\SurveyToAssign.cs" />
+    <Compile Include="Models\StudentAdvancementViewModel.cs" />
     <Compile Include="Models\SurveyViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\OwnStyles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -310,13 +313,13 @@
     <Content Include="Views\Account\ContactAdmin.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
     <Content Include="Views\Shared\_HeaderNavBar.cshtml" />
+    <Content Include="Views\Exercise\ChoseYourLevel.cshtml" />
+    <Content Include="Views\Exercise\ChoseExerciseLevel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\ChooseSurvey\" />
     <Folder Include="Views\FillSurvey\" />
-    <Folder Include="Views\Students\" />
-    <Folder Include="Views\Surveys\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
