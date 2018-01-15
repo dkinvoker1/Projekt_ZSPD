@@ -144,6 +144,14 @@
     <Compile Include="Migrations\201801102105306_Ola.Designer.cs">
       <DependentUpon>201801102105306_Ola.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801152133016_refactor.cs" />
+    <Compile Include="Migrations\201801152133016_refactor.Designer.cs">
+      <DependentUpon>201801152133016_refactor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801152207586_add_graph.cs" />
+    <Compile Include="Migrations\201801152207586_add_graph.Designer.cs">
+      <DependentUpon>201801152207586_add_graph.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\EntityModels\Accounts\AppUser.cs" />
@@ -153,6 +161,7 @@
     <Compile Include="Models\EntityModels\Accounts\Psychologist.cs" />
     <Compile Include="Models\EntityModels\Excercise.cs" />
     <Compile Include="Models\EntityModels\Grade.cs" />
+    <Compile Include="Models\EntityModels\SubjectGraph.cs" />
     <Compile Include="Models\EntityModels\Survey.cs" />
     <Compile Include="Models\EntityModels\Accounts\Student.cs" />
     <Compile Include="Models\EntityModels\Question.cs" />
@@ -198,6 +207,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801102105306_Ola.resx">
       <DependentUpon>201801102105306_Ola.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801152133016_refactor.resx">
+      <DependentUpon>201801152133016_refactor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801152207586_add_graph.resx">
+      <DependentUpon>201801152207586_add_graph.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -11,6 +11,6 @@ namespace ZSPD.Domain.Models.EntityModels.Accounts
 
         public virtual ICollection<Excercise> ProperlySolvedExcercises { get; set; }
 
-        // ICollection<Survey> Surveys 
+        public virtual SubjectGraph ActualSubject { get; set; }
     }
 }
