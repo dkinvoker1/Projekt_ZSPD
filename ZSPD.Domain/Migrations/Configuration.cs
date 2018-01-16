@@ -6,7 +6,11 @@ namespace ZSPD.Domain.Migrations
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.IO;
     using System.Linq;
+    using System.Reflection;
+    using System.Web;
+    using System.Web.Hosting;
     using ZSPD.Domain.Models.EntityModels;
     using ZSPD.Domain.Models.EntityModels.Accounts;
 
@@ -22,6 +26,7 @@ namespace ZSPD.Domain.Migrations
         {
             CreateRoles(context);
 
+            CreateSubject(context);
             AddUsers(context);
             AddQuestions(context);
             AddPsychologists(context);
@@ -38,6 +43,43 @@ namespace ZSPD.Domain.Migrations
                 userManager.Create(userToInsert, "superTajneHas³o123");
                 userManager.AddToRole(userToInsert.Id, Roles.Admin);
             }
+        }
+
+        private string MapPath(string seedFile)
+        {
+            if (HttpContext.Current != null)
+                return HostingEnvironment.MapPath(seedFile);
+
+            var absolutePath = new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath; //was AbsolutePath but didn't work with spaces according to comments
+            var directoryName = Path.GetDirectoryName(absolutePath);
+            var path = Path.Combine(directoryName, "..\\.." + seedFile.TrimStart('~').Replace('/', '\\'));
+
+            return path;
+        }
+
+        private void CreateSubject(ZSPD.Domain.Models.ApplicationDbContext context)
+        {
+            
+
+           // string mainPath = HttpContext.Current.Server.MapPath("~");
+
+            // wczytanie z pliku tekstowego wartosci dla nastepnikow
+            string poj = System.IO.File.ReadAllText(MapPath("~/Resources/Lista_pojec.txt")); // Cofniêcie o 1 folder w drzewku
+            // wczytanie z pliku tekstowego wartosci dla poprzednikow
+            string poj1 = System.IO.File.ReadAllText(MapPath("~/Resources/Lista_pojec1.txt"));
+            // wczytanie z pliku tekstowego zadan dla odp pojec
+            string zad = System.IO.File.ReadAllText(MapPath("~/Resources/Lista_zadan.txt"));
+
+            SubjectGraph graph = new SubjectGraph()
+            {
+                Name = "Algebra",
+                NextConcepts = poj,
+                PreviousConcepts = poj1,
+                Exercises = zad
+            };
+
+            context.SubjectGraphs.Add(graph);
+            context.SaveChanges();
         }
 
         private void CreateRoles(ZSPD.Domain.Models.ApplicationDbContext context)
@@ -99,7 +141,7 @@ namespace ZSPD.Domain.Migrations
 
             if (!(context.Users.Any(u => u.UserName == "testUser")))
             {
-                var userToInsert = new Student { UserName = "testUser" };
+                var userToInsert = new Student { UserName = "testUser", ActualSubject = context.SubjectGraphs.First() };
 
                 userManager.Create(userToInsert, "test");
                 userManager.AddToRole(userToInsert.Id, Roles.User);
@@ -107,7 +149,7 @@ namespace ZSPD.Domain.Migrations
 
             if (!(context.Users.Any(u => u.UserName == "testUser2")))
             {
-                var userToInsert = new Student { UserName = "testUser2" };
+                var userToInsert = new Student { UserName = "testUser2", ActualSubject = context.SubjectGraphs.First() };
 
                 userManager.Create(userToInsert, "test");
                 userManager.AddToRole(userToInsert.Id, Roles.User);

@@ -13,14 +13,8 @@ namespace ZSPD.Domain.Managers
 {
     public class StudentManager : IStudentManager
     {
-
-        int[,] pojecian = new int[23, 4];
-        int[,] pojeciap = new int[23, 3];
-        int[,] zadania = new int[23, 4];
-
         public StudentManager()
         {
-            GetExcerciseOrder();    // Czy potrzebujemy tego cały czas? Każde wywołanie StudentManager'a będzie wywołowało ten konstruktor
         }
 
         public Models.EntityModels.Survey GetActiveSurvey(string userID)
@@ -119,41 +113,68 @@ namespace ZSPD.Domain.Managers
             }
         }
 
-        public void GetExcerciseOrder()
+        public void GetExcerciseOrder(out int[,] pojecian, out int[,] pojeciap, out int[,] zadania, string userId)
         {
-            // Wczytanie plików 
-            if (HttpContext.Current == null)
+            Student user;
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                throw new NullReferenceException("Brak Http context!");
+                user = db.Students.FirstOrDefault(x => x.Id == userId);
+                if (user.ActualSubject == null)
+                {
+                    user.ActualSubject = db.SubjectGraphs.First();
+                    db.SaveChanges();
+                }
             }
 
-            string mainPath = HttpContext.Current.Server.MapPath("~");
-            mainPath = Path.GetDirectoryName(mainPath); // Cofnięcie o 1 folder w drzewku
-            mainPath = Path.GetDirectoryName(mainPath);
-
             // wczytanie z pliku tekstowego wartosci dla nastepnikow
-            string poj = System.IO.File.ReadAllText(String.Format(@"{0}\ZSPD.Domain\Resources\Lista_pojec.txt", mainPath));
+            string poj = user.ActualSubject.NextConcepts;
+
+            //System.IO.File.ReadAllText(String.Format(@"{0}\ZSPD.Domain\Resources\Lista_pojec.txt", mainPath));
             // wczytanie z pliku tekstowego wartosci dla poprzednikow
-            string poj1 = System.IO.File.ReadAllText(String.Format(@"{0}\ZSPD.Domain\Resources\Lista_pojec1.txt", mainPath));
+            string poj1 = user.ActualSubject.PreviousConcepts;
+            //System.IO.File.ReadAllText(String.Format(@"{0}\ZSPD.Domain\Resources\Lista_pojec1.txt", mainPath));
             // wczytanie z pliku tekstowego zadan dla odp pojec
-            string zad = System.IO.File.ReadAllText(String.Format(@"{0}\ZSPD.Domain\Resources\Lista_zadan.txt", mainPath));
+            string zad = user.ActualSubject.Exercises;
+                //System.IO.File.ReadAllText(String.Format(@"{0}\ZSPD.Domain\Resources\Lista_zadan.txt", mainPath));
 
             string[] roz = poj.Split(';');
             string[] split = poj1.Split(';');
             string[] dew = zad.Split(';');
 
             // wczytywanie listy nastepnikow do tablicy
+            // elastyczne rozwiązanie - nie delkarujemy na sztywno wymiarów. Nie zabezpieczone przed błędami
+            int ileZadan = 0;
+            for (int i = 0; i < roz.Length; i++)
+            {
+                int ile = roz[i].Split(',').Length;
+                if(ile> ileZadan)
+                {
+                    ileZadan = ile;
+                }
+            }
+
+            pojecian = new int[roz.Length, ileZadan]; 
             for (int i = 0; i < roz.Length; i++)
             {
                 string[] roz1 = roz[i].Split(',');
                 for (int j = 0; j < roz1.Length; j++)
                 {
-
                     pojecian[i, j] = int.Parse(roz1[j]);
                 }
             }
 
             // wczytywanie listy poprzednikow do tablicy
+            ileZadan = 0;
+            for (int i = 0; i < split.Length; i++)
+            {
+                int ile = split[i].Split(',').Length;
+                if (ile > ileZadan)
+                {
+                    ileZadan = ile;
+                }
+            }
+
+            pojeciap = new int[split.Length, ileZadan];
             for (int i = 0; i < split.Length; i++)
             {
                 string[] split1 = split[i].Split(',');
@@ -165,6 +186,17 @@ namespace ZSPD.Domain.Managers
             }
 
             //wczytywanie listy zadan do tablicy
+            ileZadan = 0;
+            for (int i = 0; i < dew.Length; i++)
+            {
+                int ile = dew[i].Split(',').Length;
+                if (ile > ileZadan)
+                {
+                    ileZadan = ile;
+                }
+            }
+
+            zadania = new int[dew.Length, ileZadan];
             for (int i = 0; i < dew.Length; i++)
             {
                 string[] dew1 = dew[i].Split(',');
@@ -176,8 +208,15 @@ namespace ZSPD.Domain.Managers
             }
         }
 
-        public int GetStudentAdvacement(int advacement)
+        public int GetStudentAdvacement(int advacement, string userId)
         {
+            int[,] pojecian;
+            int[,] pojeciap;
+            int[,] zadania;
+
+            GetExcerciseOrder(out pojecian, out pojeciap, out zadania, userId);
+
+
             Random sectionRand = new Random();
             Random excerciseRand = new Random();
 
@@ -238,6 +277,12 @@ namespace ZSPD.Domain.Managers
 
         public int GetExcerciseNumberFromIssue(int iloscz, int start, int[,] pojecia, string userID)
         {
+            int[,] pojecian;
+            int[,] pojeciap;
+            int[,] zadania;
+
+            GetExcerciseOrder(out pojecian, out pojeciap, out zadania, userID);
+
             Random x = new Random();
             int wylosowana = x.Next(1, iloscz + 1);
             int wylosowanePojecie = pojecia[start, wylosowana - 1];
@@ -291,6 +336,12 @@ namespace ZSPD.Domain.Managers
 
         public int GetNextExcerciseNumber(int excerciseNumber, bool answer, string userID)
         {
+            int[,] pojecian;
+            int[,] pojeciap;
+            int[,] zadania;
+
+            GetExcerciseOrder(out pojecian, out pojeciap, out zadania, userID);
+
             if (!ExcerciseSolutionStatus(excerciseNumber, userID))
                 if (answer == true)
                 {
