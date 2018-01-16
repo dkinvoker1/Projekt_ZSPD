@@ -1,0 +1,31 @@
+﻿@model ZSPD.Models.StudentDetailsViewModel
+
+@{
+    ViewBag.Title = "StudentDetails";
+}
+
+<h2>StudentDetails</h2>
+
+@using (Html.BeginForm("AddNewSubject", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+        <div class="col-xs-5">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.DisplayFor(m => m.ActualStudent.UserName, new { @class = "col-md-2 control-label" })
+                @Html.HiddenFor(m => m.ActualStudent.Id)
+            </div>
+            <div class="form-group">
+                @Html.DropDownListFor(m => m.SelectedSubject, new SelectList(Model.AllSubjects.Select(x => x.Name)))
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-8">
+                    <input type="submit" class="btn btn-sm btn-primary" value="Zapisz" />
+                </div>
+            </div>
+        </div>
+}
+

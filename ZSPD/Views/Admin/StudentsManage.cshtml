@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ZSPD.Domain.Models.EntityModels.Accounts.Student>
+
+@{
+    ViewBag.Title = "StudentsManage";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<h2>StudentsManage</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Szczegóły", "StudentDetails", new { id=item.Id }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
