@@ -238,7 +238,6 @@
     <Compile Include="Models\AssignSurveys\AssignSurveyToStudentVM.cs" />
     <Compile Include="Models\CreateSurveyViewModel.cs" />
     <Compile Include="Models\EditSurveyViewModel.cs" />
-    <Compile Include="Models\ExcelModel.cs" />
     <Compile Include="Models\ExcerciseViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\QuestionRate.cs" />
