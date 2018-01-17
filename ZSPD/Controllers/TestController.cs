@@ -42,34 +42,6 @@ namespace ZSPD.Controllers
         }
 
         [Authorize(Roles = Roles.Psychologist)]
-        public ActionResult AddQuestionFromExcel(string path)
-        {
-            var question = new Question();
-            var answer = new Answer();
-            string questionSTR;
-            int questionId;
-            DataTable table = ExcelModel.readExcel(path);
-            foreach (DataRow row in table.Rows)
-            {
-                if ((row.ItemArray[0].ToString()) == "")
-                {
-                    break;
-                }
-                if (row.ItemArray[0].ToString() != "")
-                {
-                    questionSTR = row.ItemArray[0].ToString();
-                    question.Content=questionSTR;
-                    _context.Questions.Add(question);
-                    _context.SaveChanges();
-
-                }
-
-            }
-            
-            return RedirectToAction("ShowAllQuestions");
-        }
-
-        [Authorize(Roles = Roles.Psychologist)]
         public ActionResult CreateSurvey(int id)
         {
             // Get questions

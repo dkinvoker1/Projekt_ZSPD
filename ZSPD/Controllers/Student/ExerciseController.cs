@@ -33,7 +33,8 @@ namespace ZSPD.Controllers.Student
         [HttpPost]
         public ActionResult ChoseYourLevel(StudentAdvancementViewModel vm)
         {
-            int exNumber = _studentManager.GetStudentAdvacement(vm.Advacement); //poprawić, żeby się zwracało faktycznie
+            string userId = User.Identity.GetUserId();
+            int exNumber = _studentManager.GetStudentAdvacement(vm.Advacement, userId); //poprawić, żeby się zwracało faktycznie
             return RedirectToAction("ChoseExerciseLevel", "Exercise", new { exerc = exNumber });
         }
 

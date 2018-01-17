@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNet.Identity;
 
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 using ZSPD.Domain.Managers;
@@ -189,6 +191,22 @@ namespace ZSPD.Controllers.Psychologist
             _psychologistManager.AddQuestion(question, User.Identity.GetUserId());
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddQuestionsFromFile(HttpPostedFileBase file)
+        {
+            if (file.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/App_Data/Uploads"), fileName);
+
+                file.SaveAs(path);
+
+                _psychologistManager.AddQuestionFromExcel(path, User.Identity.GetUserId());
+            }
+
+            return RedirectToAction("AddQuestion", "Surveys");
         }
     }
 }

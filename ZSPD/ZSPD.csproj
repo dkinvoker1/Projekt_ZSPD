@@ -223,6 +223,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Psychologist\StudentsController.cs" />
     <Compile Include="Controllers\Psychologist\SurveysController.cs" />
@@ -237,7 +238,6 @@
     <Compile Include="Models\AssignSurveys\AssignSurveyToStudentVM.cs" />
     <Compile Include="Models\CreateSurveyViewModel.cs" />
     <Compile Include="Models\EditSurveyViewModel.cs" />
-    <Compile Include="Models\ExcelModel.cs" />
     <Compile Include="Models\ExcerciseViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\QuestionRate.cs" />
@@ -246,6 +246,7 @@
     <Compile Include="Models\AssignSurveys\StudentToAssign.cs" />
     <Compile Include="Models\AssignSurveys\SurveyToAssign.cs" />
     <Compile Include="Models\StudentAdvancementViewModel.cs" />
+    <Compile Include="Models\StudentDetailsViewModel.cs" />
     <Compile Include="Models\SurveyViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -284,7 +285,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Test\ShowSurvey.cshtml" />
     <Content Include="Views\Test\ShowUserData.cshtml" />
@@ -315,9 +315,12 @@
     <Content Include="Views\Shared\_HeaderNavBar.cshtml" />
     <Content Include="Views\Exercise\ChoseYourLevel.cshtml" />
     <Content Include="Views\Exercise\ChoseExerciseLevel.cshtml" />
+    <Content Include="Views\Admin\StudentsManage.cshtml" />
+    <Content Include="Views\Admin\StudentDetails.cshtml" />
+    <Content Include="Views\Admin\AddGraph.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Uploads\" />
     <Folder Include="Views\ChooseSurvey\" />
     <Folder Include="Views\FillSurvey\" />
   </ItemGroup>

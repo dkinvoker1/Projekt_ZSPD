@@ -13,6 +13,7 @@ namespace ZSPD.Domain.Models
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Answer> Answers { get; set; }
         public virtual DbSet<Grade> Grades { get; set; }
+        public DbSet<SubjectGraph> SubjectGraphs { get; set; }
 
         public DbSet<Psychologist> Psychologists { get; set; }
         public DbSet<Student> Students { get; set; }

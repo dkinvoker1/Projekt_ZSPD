@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace ZSPD.Domain.Models.EntityModels
 {
-    public class Excercise
+    public class Issue
     {
         public int Id { get; set; }
-        public int excerciseNumber { get; set; }
+        public int issueNumber { get; set; }
         public virtual SubjectGraph graph { get; set; }
-        public Excercise()
+        public Issue()
         {
 
         }
 
-        public Excercise(int number, SubjectGraph graph)
+        public Issue(int number, SubjectGraph graph)
         {
-            this.excerciseNumber = number;
+            this.issueNumber = number;
             this.graph = graph;
         }
     }

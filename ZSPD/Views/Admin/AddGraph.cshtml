@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "AddGraph";
+}
+
+<h2>AddGraph</h2>
+@using (Html.BeginForm("UploadGraph", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="text" name="name" id="name"/>
+
+    <label for="file1">Filename1:</label>
+    <input type="file" name="files" id="file1" />
+
+    <label for="file2">Filename2:</label>
+    <input type="file" name="files" id="file2" />
+
+    <label for="file2">Filename3:</label>
+        <input type="file" name="files" id="file2" />
+
+
+    <input type="submit" name="Submit" id="Submit" value="UploadGraph" />
+}
