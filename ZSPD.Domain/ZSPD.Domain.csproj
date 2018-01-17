@@ -140,17 +140,9 @@
     <Compile Include="Managers\IStudentManager.cs" />
     <Compile Include="Managers\PsychologistManager.cs" />
     <Compile Include="Managers\StudentManager.cs" />
-    <Compile Include="Migrations\201801102105306_Ola.cs" />
-    <Compile Include="Migrations\201801102105306_Ola.Designer.cs">
-      <DependentUpon>201801102105306_Ola.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801152133016_refactor.cs" />
-    <Compile Include="Migrations\201801152133016_refactor.Designer.cs">
-      <DependentUpon>201801152133016_refactor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801152207586_add_graph.cs" />
-    <Compile Include="Migrations\201801152207586_add_graph.Designer.cs">
-      <DependentUpon>201801152207586_add_graph.cs</DependentUpon>
+    <Compile Include="Migrations\201801172026178_nazwa.cs" />
+    <Compile Include="Migrations\201801172026178_nazwa.Designer.cs">
+      <DependentUpon>201801172026178_nazwa.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -161,6 +153,7 @@
     <Compile Include="Models\EntityModels\Accounts\Psychologist.cs" />
     <Compile Include="Models\EntityModels\Excercise.cs" />
     <Compile Include="Models\EntityModels\Grade.cs" />
+    <Compile Include="Models\EntityModels\Issue.cs" />
     <Compile Include="Models\EntityModels\SubjectGraph.cs" />
     <Compile Include="Models\EntityModels\Survey.cs" />
     <Compile Include="Models\EntityModels\Accounts\Student.cs" />
@@ -205,14 +198,8 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801102105306_Ola.resx">
-      <DependentUpon>201801102105306_Ola.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801152133016_refactor.resx">
-      <DependentUpon>201801152133016_refactor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801152207586_add_graph.resx">
-      <DependentUpon>201801152207586_add_graph.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801172026178_nazwa.resx">
+      <DependentUpon>201801172026178_nazwa.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
