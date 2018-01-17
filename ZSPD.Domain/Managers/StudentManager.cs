@@ -36,7 +36,7 @@ namespace ZSPD.Domain.Managers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var user = db.Students.FirstOrDefault(x => x.Id == userID);
-                if(user != null && user.ProperlySolvedExcercises.Count > 0)
+                if(user != null && user.ProperlySolvedExcercises.Where(ex => ex.graph.Id == user.ActualSubject.Id).Count() > 0)
                 {
                     return true;
                 }
@@ -49,9 +49,9 @@ namespace ZSPD.Domain.Managers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var user = db.Students.FirstOrDefault(x => x.Id == userID);
-                if (user != null && user.ProperlySolvedExcercises.Count > 0)
+                if (user != null && user.ProperlySolvedExcercises.Where(ex => ex.graph.Id == user.ActualSubject.Id).Count() > 0)
                 {
-                    return user.ProperlySolvedExcercises.Last().excerciseNumber;
+                    return user.ProperlySolvedExcercises.Where(ex => ex.graph.Id == user.ActualSubject.Id).Last().excerciseNumber;
                 }
                 return 0;
             }
@@ -88,13 +88,56 @@ namespace ZSPD.Domain.Managers
             }
         }
 
+        public int GetExcerciseIssueNumber(int excerciseNumber, string userId)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var user = db.Students.FirstOrDefault(x => x.Id == userId);
+
+                int[,] pojecian;
+                int[,] pojeciap;
+                int[,] zadania;
+
+                GetExcerciseOrder(out pojecian, out pojeciap, out zadania, userId);
+
+                int pojecie = 0;
+                for (int i = 0; i < zadania.GetLength(0); i++)
+                {
+                    for (int j = 0; j < zadania.GetLength(1); j++)
+                    {
+                        if (zadania[i, j] == excerciseNumber)
+                        {
+                            pojecie = i;
+                        }
+                    }
+                }
+
+                return pojecie;
+            }
+        }
+
         public bool ExcerciseSolutionStatus(int excerciseNumber, string userID)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var user = db.Students.FirstOrDefault(x => x.Id == userID);
-                var solvedExcercises = user.ProperlySolvedExcercises;
+                var solvedExcercises = user.ProperlySolvedExcercises.Where(x => x.graph.Id == user.ActualSubject.Id);
                 if (solvedExcercises.Where(x => x.excerciseNumber == excerciseNumber).Any())
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+        }
+
+        public bool IssueSolutionStatus(int issueNumber, string userID)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var user = db.Students.FirstOrDefault(x => x.Id == userID);
+                var solvedIssues = user.SolvedIssues.Where(x => x.graph.Id == user.ActualSubject.Id);
+                if (solvedIssues.Where(x => x.issueNumber == issueNumber).Any())
                 {
                     return true;
                 }
@@ -108,7 +151,9 @@ namespace ZSPD.Domain.Managers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var user = db.Students.FirstOrDefault(x => x.Id == userID);
-                user.ProperlySolvedExcercises.Add(new Excercise(excerciseNumber));
+                int issueNumber = GetExcerciseIssueNumber(excerciseNumber, userID);
+                user.ProperlySolvedExcercises.Add(new Excercise(excerciseNumber, user.ActualSubject));
+                user.SolvedIssues.Add(new Issue(issueNumber, user.ActualSubject));
                 db.SaveChanges();
             }
         }
@@ -259,6 +304,19 @@ namespace ZSPD.Domain.Managers
 
             excercisePosition = excerciseRand.Next(0, iloscz - 1);
 
+            
+            // dodawanie do wektora wiedzy z pojęciami poprzednich pojęć
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var user = db.Students.FirstOrDefault(x => x.Id == userId);
+                int issueNumber = GetExcerciseIssueNumber(zadania[sectionNumber, excercisePosition], userId);
+                for (int i = 0; i < issueNumber; i++)
+                {
+                    user.SolvedIssues.Add(new Issue(i, user.ActualSubject));
+                }
+                db.SaveChanges();
+            }
+
             return zadania[sectionNumber, excercisePosition];
 
         }
@@ -293,7 +351,7 @@ namespace ZSPD.Domain.Managers
             int iloscZadan = GetIssuesCount(zadania, wylosowanePojecie - 1);
             int indexZadania = x.Next(0, iloscZadan);
             int zadanie = zadania[wylosowanePojecie - 1, indexZadania];
-            if (!ExcerciseSolutionStatus(zadanie, userID))
+            if (!ExcerciseSolutionStatus(zadanie, userID) && !IssueSolutionStatus(GetExcerciseIssueNumber(zadanie, userID), userID))
             {
                 return zadanie;
             }
@@ -313,7 +371,7 @@ namespace ZSPD.Domain.Managers
                     }
                     foreach (var exc in lastExcercises)
                     {
-                        if (!ExcerciseSolutionStatus(exc, userID))
+                        if (!ExcerciseSolutionStatus(exc, userID) && !IssueSolutionStatus(GetExcerciseIssueNumber(exc, userID), userID))
                         {
                             return exc;
                         }
@@ -323,8 +381,19 @@ namespace ZSPD.Domain.Managers
                     using (ApplicationDbContext db = new ApplicationDbContext())
                     {
                        var user = db.Students.FirstOrDefault(ex => ex.Id == userID);
-                       user.ProperlySolvedExcercises.Clear();
-                       db.SaveChanges();
+                       var solvedExcercises = user.ProperlySolvedExcercises.Where(ex => ex.graph.Id == user.ActualSubject.Id);
+                        foreach(var ex in solvedExcercises)
+                        {
+                            user.ProperlySolvedExcercises.Remove(ex);
+                        }
+
+                        var solvedIssues = user.SolvedIssues.Where(ex => ex.graph.Id == user.ActualSubject.Id);
+                        foreach (var ex in solvedIssues)
+                        {
+                            user.SolvedIssues.Remove(ex);
+                        }
+
+                        db.SaveChanges();
                     }
 
                     return GetExcerciseNumberFromIssue(GetIssuesCount(pojecia, 0), 0, pojecia, userID);
@@ -342,7 +411,7 @@ namespace ZSPD.Domain.Managers
 
             GetExcerciseOrder(out pojecian, out pojeciap, out zadania, userID);
 
-            if (!ExcerciseSolutionStatus(excerciseNumber, userID))
+            if (!ExcerciseSolutionStatus(excerciseNumber, userID) && !IssueSolutionStatus(GetExcerciseIssueNumber(excerciseNumber, userID), userID))
                 if (answer == true)
                 {
                     SaveSolvedExcercise(excerciseNumber, userID);
@@ -350,19 +419,8 @@ namespace ZSPD.Domain.Managers
 
             // szukanie w którym pojęciu znajduje się wykonane zadanie
             // jeżeli nr zadania będzie spoza zakresu 1 - 46, to wylosuje się zadanie dla pojęcia pierwszego
-            int pojecie = 0;
-            for (int i = 0; i < zadania.GetLength(0); i++)
-            {
-                for (int j = 0; j < zadania.GetLength(1); j++)
-                {
-                    if (zadania[i, j] == excerciseNumber)
-                    {
-                        pojecie = i;
-                    }
-                }
-            }
 
-            int start = pojecie;
+            int start = GetExcerciseIssueNumber(excerciseNumber, userID);
             int iloscz = 0;
 
                 if (answer == true)
