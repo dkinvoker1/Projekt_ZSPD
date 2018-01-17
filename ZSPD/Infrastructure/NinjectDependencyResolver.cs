@@ -28,6 +28,7 @@ namespace ZSPD.Infrastructure
         {
             kernel.Bind<IStudentManager>().To<StudentManager>();
             kernel.Bind<IPsychologistManager>().To<PsychologistManager>();
+            kernel.Bind<IGraphManager>().To<GraphManager>();
 		}
     }
 }

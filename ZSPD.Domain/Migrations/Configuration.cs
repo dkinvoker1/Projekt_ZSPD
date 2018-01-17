@@ -59,27 +59,26 @@ namespace ZSPD.Domain.Migrations
 
         private void CreateSubject(ZSPD.Domain.Models.ApplicationDbContext context)
         {
-            
-
-           // string mainPath = HttpContext.Current.Server.MapPath("~");
-
-            // wczytanie z pliku tekstowego wartosci dla nastepnikow
-            string poj = System.IO.File.ReadAllText(MapPath("~/Resources/Lista_pojec.txt")); // Cofniêcie o 1 folder w drzewku
-            // wczytanie z pliku tekstowego wartosci dla poprzednikow
-            string poj1 = System.IO.File.ReadAllText(MapPath("~/Resources/Lista_pojec1.txt"));
-            // wczytanie z pliku tekstowego zadan dla odp pojec
-            string zad = System.IO.File.ReadAllText(MapPath("~/Resources/Lista_zadan.txt"));
-
-            SubjectGraph graph = new SubjectGraph()
+            if (context.SubjectGraphs.Count() == 0)
             {
-                Name = "Algebra",
-                NextConcepts = poj,
-                PreviousConcepts = poj1,
-                Exercises = zad
-            };
+                // wczytanie z pliku tekstowego wartosci dla nastepnikow
+                string poj = System.IO.File.ReadAllText(MapPath("~/Resources/Lista_pojec.txt")); // Cofniêcie o 1 folder w drzewku
+                                                                                                 // wczytanie z pliku tekstowego wartosci dla poprzednikow
+                string poj1 = System.IO.File.ReadAllText(MapPath("~/Resources/Lista_pojec1.txt"));
+                // wczytanie z pliku tekstowego zadan dla odp pojec
+                string zad = System.IO.File.ReadAllText(MapPath("~/Resources/Lista_zadan.txt"));
 
-            context.SubjectGraphs.Add(graph);
-            context.SaveChanges();
+                SubjectGraph graph = new SubjectGraph()
+                {
+                    Name = "Algebra",
+                    NextConcepts = poj,
+                    PreviousConcepts = poj1,
+                    Exercises = zad
+                };
+
+                context.SubjectGraphs.Add(graph);
+                context.SaveChanges();
+            }
         }
 
         private void CreateRoles(ZSPD.Domain.Models.ApplicationDbContext context)

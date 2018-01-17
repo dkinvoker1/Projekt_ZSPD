@@ -44,6 +44,18 @@ namespace ZSPD.Domain.Managers
             }
         }
 
+        public void SetActiveSubject(string userID, int subjectId)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var subject = context.SubjectGraphs.First(x => x.Id == subjectId);
+                var user = context.Students.FirstOrDefault(x => x.Id == userID);
+                user.ActualSubject = subject;
+
+                context.SaveChanges();
+            }
+        }
+
         public int GetResolvedExerciseNumber(string userID)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
@@ -399,7 +411,7 @@ namespace ZSPD.Domain.Managers
                     return GetExcerciseNumberFromIssue(GetIssuesCount(pojecia, 0), 0, pojecia, userID);
 
                  }
-               
+
             }
         }
 

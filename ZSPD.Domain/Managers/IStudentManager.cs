@@ -18,5 +18,7 @@ namespace ZSPD.Domain.Managers
         int GetNextExcerciseNumber(int excerciseNumber, bool answer, string userID);
 
         int GetResolvedExerciseNumber(string userID);
+
+        void SetActiveSubject(string userID, int subjectId);
     }
 }
