@@ -14,5 +14,6 @@ namespace ZSPD.Domain.Models.EntityModels.Accounts
         public virtual ICollection<Issue> SolvedIssues { get; set; }
 
         public virtual SubjectGraph ActualSubject { get; set; }
+
     }
 }

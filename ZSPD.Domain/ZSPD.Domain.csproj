@@ -144,6 +144,10 @@
     <Compile Include="Migrations\201801172026178_nazwa.Designer.cs">
       <DependentUpon>201801172026178_nazwa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801172118033_nazwa1.cs" />
+    <Compile Include="Migrations\201801172118033_nazwa1.Designer.cs">
+      <DependentUpon>201801172118033_nazwa1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\EntityModels\Accounts\AppUser.cs" />
@@ -200,6 +204,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801172026178_nazwa.resx">
       <DependentUpon>201801172026178_nazwa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801172118033_nazwa1.resx">
+      <DependentUpon>201801172118033_nazwa1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -10,15 +10,16 @@ namespace ZSPD.Domain.Models.EntityModels
     {
         public int Id { get; set; }
         public int issueNumber { get; set; }
-
+        public virtual SubjectGraph graph { get; set; }
         public Issue()
         {
 
         }
 
-        public Issue(int number)
+        public Issue(int number, SubjectGraph graph)
         {
             this.issueNumber = number;
+            this.graph = graph;
         }
     }
 }

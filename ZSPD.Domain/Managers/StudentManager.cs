@@ -36,7 +36,7 @@ namespace ZSPD.Domain.Managers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var user = db.Students.FirstOrDefault(x => x.Id == userID);
-                if(user != null && user.ProperlySolvedExcercises.Count > 0)
+                if(user != null && user.ProperlySolvedExcercises.Where(ex => ex.graph.Id == user.ActualSubject.Id).Count() > 0)
                 {
                     return true;
                 }
@@ -49,9 +49,9 @@ namespace ZSPD.Domain.Managers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var user = db.Students.FirstOrDefault(x => x.Id == userID);
-                if (user != null && user.ProperlySolvedExcercises.Count > 0)
+                if (user != null && user.ProperlySolvedExcercises.Where(ex => ex.graph.Id == user.ActualSubject.Id).Count() > 0)
                 {
-                    return user.ProperlySolvedExcercises.Last().excerciseNumber;
+                    return user.ProperlySolvedExcercises.Where(ex => ex.graph.Id == user.ActualSubject.Id).Last().excerciseNumber;
                 }
                 return 0;
             }
@@ -121,7 +121,7 @@ namespace ZSPD.Domain.Managers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var user = db.Students.FirstOrDefault(x => x.Id == userID);
-                var solvedExcercises = user.ProperlySolvedExcercises;
+                var solvedExcercises = user.ProperlySolvedExcercises.Where(x => x.graph.Id == user.ActualSubject.Id);
                 if (solvedExcercises.Where(x => x.excerciseNumber == excerciseNumber).Any())
                 {
                     return true;
@@ -136,7 +136,7 @@ namespace ZSPD.Domain.Managers
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 var user = db.Students.FirstOrDefault(x => x.Id == userID);
-                var solvedIssues = user.SolvedIssues;
+                var solvedIssues = user.SolvedIssues.Where(x => x.graph.Id == user.ActualSubject.Id);
                 if (solvedIssues.Where(x => x.issueNumber == issueNumber).Any())
                 {
                     return true;
@@ -152,8 +152,8 @@ namespace ZSPD.Domain.Managers
             {
                 var user = db.Students.FirstOrDefault(x => x.Id == userID);
                 int issueNumber = GetExcerciseIssueNumber(excerciseNumber, userID);
-                user.ProperlySolvedExcercises.Add(new Excercise(excerciseNumber));
-                user.SolvedIssues.Add(new Issue(issueNumber));
+                user.ProperlySolvedExcercises.Add(new Excercise(excerciseNumber, user.ActualSubject));
+                user.SolvedIssues.Add(new Issue(issueNumber, user.ActualSubject));
                 db.SaveChanges();
             }
         }
@@ -312,7 +312,7 @@ namespace ZSPD.Domain.Managers
                 int issueNumber = GetExcerciseIssueNumber(zadania[sectionNumber, excercisePosition], userId);
                 for (int i = 0; i < issueNumber; i++)
                 {
-                    user.SolvedIssues.Add(new Issue(i));
+                    user.SolvedIssues.Add(new Issue(i, user.ActualSubject));
                 }
                 db.SaveChanges();
             }
@@ -381,9 +381,19 @@ namespace ZSPD.Domain.Managers
                     using (ApplicationDbContext db = new ApplicationDbContext())
                     {
                        var user = db.Students.FirstOrDefault(ex => ex.Id == userID);
-                       user.ProperlySolvedExcercises.Clear();
-                       user.SolvedIssues.Clear();
-                       db.SaveChanges();
+                       var solvedExcercises = user.ProperlySolvedExcercises.Where(ex => ex.graph.Id == user.ActualSubject.Id);
+                        foreach(var ex in solvedExcercises)
+                        {
+                            user.ProperlySolvedExcercises.Remove(ex);
+                        }
+
+                        var solvedIssues = user.SolvedIssues.Where(ex => ex.graph.Id == user.ActualSubject.Id);
+                        foreach (var ex in solvedIssues)
+                        {
+                            user.SolvedIssues.Remove(ex);
+                        }
+
+                        db.SaveChanges();
                     }
 
                     return GetExcerciseNumberFromIssue(GetIssuesCount(pojecia, 0), 0, pojecia, userID);
