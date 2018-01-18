@@ -1,24 +1,58 @@
-﻿@model IEnumerable<ZSPD.Domain.Models.EntityModels.Survey>
+﻿@using ZSPD.Domain.Models.EntityModels
+@model List<ZSPD.Domain.Models.EntityModels.Survey>
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
 
 
 @Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Zarządzaj ankietami" } })
-    @foreach(var survey in Model)
-    {
-        
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ankieta</th>
+            <th>Edytuj</th>
+            <th>Usuń</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Survey surv in Model)
+        {
+            <tr>
+                <th>
+                    Ankieta @surv.Id
+                </th>
+                <th>
+                    @Html.ActionLink("Edytuj", "Edit", new { surveyId = surv.Id }, new { @class = "col-lg-2 btn-info btn" })
+                </th>
+                <th>
+                    @Html.ActionLink("Usuń", "RemoveSurvey", new { surveyId = surv.Id }, new { @class = "col-lg-2 btn-info btn" })
+                </th>
+            </tr>
+            
+            
+        }
+
+    </tbody>
+</table>
+
+
+
+
+        @*@foreach (var survey in Model)
+        {
+
             <label>Ankieta @survey.Id</label>
 
 
-            @Html.ActionLink("Edytuj", "Edit", new { surveyId = survey.Id }, new { @class = "col-lg-2 btn-info btn" })
-            @Html.ActionLink("Usuń", "RemoveSurvey", new { surveyId = survey.Id }, new { @class = "col-lg-2 btn-info btn" })
-             
-        <br />
-        <br />
-    }
+            
+            
+
+            <br />
+            <br />
+        }*@
 
 
 
 
-<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Wstecz</button></a>
-@*<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Zapisz</button></a>*@
+        <a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Wstecz</button></a>
+        @*<a href="~/Home/Psychologist"><button class="col-lg-2 btn-info btn">Zapisz</button></a>*@
