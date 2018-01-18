@@ -13,6 +13,55 @@
     
 }
 
+@using (Html.BeginForm("AddQuestionsFromFile", "Surveys", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <h3>Dodaj pytania z pliku excel:</h3>
+    <div class="container centering-container">
+        <div class="input-group" style="width: 30%;margin: 0 auto;">
+            <label class="input-group-btn">
+                <span class="own-btn btn-info btn">
+                    Załaduj plik… <input style="display: none;" multiple="" type="file" id="file" name="file">
+                </span>
+            </label>
+            <input class="form-control" readonly="" type="text">
+        </div>
+
+        <input type="submit" name="Submit" id="Submit" value="Prześlij plik" class="own-btn btn-info btn" />
+    </div>
+
+
+}
+
 <div class="container centering-container">
     @Html.ActionLink("Wstecz", "Psychologist", "Home", null, new { @class = "own-btn btn-info btn" })
 </div>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+  // We can attach the `fileselect` event to all file inputs on the page
+  $(document).on('change', ':file', function() {
+    var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.trigger('fileselect', [numFiles, label]);
+  });
+
+  // We can watch for our custom `fileselect` event like this
+    $(document).ready(function () {
+      $(':file').on('fileselect', function(event, numFiles, label) {
+
+          var input = $(this).parents('.input-group').find(':text'),
+              log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+          if( input.length ) {
+              input.val(log);
+          } else {
+              if( log ) alert(log);
+          }
+
+      });
+  });
+
+
+</script>

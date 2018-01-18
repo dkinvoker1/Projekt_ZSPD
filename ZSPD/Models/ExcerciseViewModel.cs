@@ -10,5 +10,7 @@ namespace ZSPD.Models
         public bool Answer { get; set; }
         public int ExcerciseNumber { get; set; }
         public int NextExcerciseNumber { get; set; }
+
+        public string SubjectName { get; set; }
     }
 }

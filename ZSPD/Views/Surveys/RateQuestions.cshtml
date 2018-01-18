@@ -1,163 +1,175 @@
 ﻿@using ZSPD.Models
-@model RateQuestionViewModel
+@model List<QuestionRate>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/OwnStyles.css" rel="stylesheet" />
 
-<style type="text/css">
-	.edit-mode {
-	}
-	.edit-user {
-	}
-		.edit-user display-mode {
-		}
-	.save-user edit-mode {
-	}
-	.display-mode {
-	}
-	.cancel-user {
-	}
-	.webgrid-table {
-		font-family: Arial,Helvetica,sans-serif;
-		font-size: 14px;
-		font-weight: normal;
-		width: 650px;
-		display: table;
-		border-collapse: collapse;
-		border: solid px #C5C5C5;
-		background-color: white;
-	}
-		.webgrid-table td, th {
-			border: 1px solid #C5C5C5;
-			padding: 3px 7px 2px;
-		}
-	.webgrid-header, .webgrid-header a {
-		background-color: #E3E3E3;
-		color: black;
-		text-align: left;
-		text-decoration: none;
-	}
-	.webgrid-footer {
-	}
-	.webgrid-row-style {
-		padding: 3px 7px 2px;
-	}
-	.webgrid-alternating-row {
-		background-color: #F5F5F5;
-		padding: 3px 7px 2px;
-	}
-	.col1Width {
-		width: 50px;
-	}
-	.col2Width {
-		width: 200px;
-	}
-</style>
-<script src="~/bundles/jquery"></script>
-<script type="text/javascript">
-    $(function () {
-		$('.save-grade').on('click', function () {
-			var tr = $(this).parents('tr:first');
-			var selectedGrade = tr.find("input:checked").val();
-			//alert(selectedGrade);
-			var questionId = tr.find("#lblId").text();
-			//alert(questionId);
-			if (!selectedGrade) return;
+@Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Edytuj pytania" } })
 
-            $.ajax({
-				url: '/Surveys/SaveRateForQuestion/',
-				data: { grade: selectedGrade, questionId: questionId,userId:"blee"},
-                type: 'POST',
-                success: function (data) {
-                    //alert(data);
+
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Treść pytania</th>
+                <th>Ocena</th>
+                <th>Zapisz</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (QuestionRate rate in Model)
+            {
+                using (Html.BeginForm(FormMethod.Post))
+                {
+                <tr>
+                    <th>
+                        @Html.DisplayFor(m => rate.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(m => rate.Question)
+                    </th>
+                    <th>
+                        @Html.RadioButtonFor(model => rate.Grade,1)
+                        @Html.RadioButtonFor(model => rate.Grade, 2)
+                        @Html.RadioButtonFor(model => rate.Grade, 3)
+                        @Html.RadioButtonFor(model => rate.Grade, 4)
+                        @Html.RadioButtonFor(model => rate.Grade, 5)
+                    </th>
+                    <th>
+                        @Html.HiddenFor(m=>rate.Id)
+                        @Html.HiddenFor(m => rate.Question)
+                        <input type="submit" class="own-btn btn-info btn" value="Zapisz" />
+                    </th>
+                    
+                </tr>
+                    }
                 }
-            });
 
-        });
-    })
-</script>
+        </tbody>
+    </table>
 
-@{
-	ViewBag.Title = "Rate Questions";
-	var grid = new WebGrid(Model.QuestionRates);
-	bool isChecked = false;
-	int gridNameId = 0;
-}
 
-<div id="gridContent" style=" padding:20px; ">
-	@grid.GetHtml(
-		tableStyle: "webgrid-table",
-		headerStyle: "webgrid-header",
-		footerStyle: "webgrid-footer",
-		alternatingRowStyle: "webgrid-alternating-row",
-		selectedRowStyle: "webgrid-selected-row",
-		rowStyle: "webgrid-row-style",
-		mode: WebGridPagerModes.All,
-		columns:
-			grid.Columns(
-			 grid.Column("Id", "id", format: @<text>
-					<span class="display-mode">
-						<label id="lblId">@item.id</label>
-					</span>
-			</text>, style: "col2Width"),
-				grid.Column("Question", "Pytanie", format: @<text>
-					<span class="display-mode">
-						<label id="lblQuestion">@item.Question</label>
-					</span>
-				</text>, style: "col2Width"),
-				grid.Column("Grade", "Ocena", format: @<text>
-				<span>
-						@if (@item.Grade == 1)
-						{
-							isChecked = true;
-						}
-						else
-						{
-							isChecked = false;
-						}
 
-						@Html.RadioButton("grade" + gridNameId.ToString(), "1", isChecked, new { id = "one" }) 1
-						@if (@item.Grade == 2)
-						{
-							isChecked = true;
-						}
-						else
-						{
-							isChecked = false;
-						}
-						@Html.RadioButton("grade" + gridNameId.ToString(), "2", isChecked, new { id = "two" }) 2
-						@if (@item.Grade == 3)
-						{
-							isChecked = true;
-						}
-						else
-						{
-							isChecked = false;
-						}
-						@Html.RadioButton("grade" + gridNameId.ToString(), "3", isChecked, new { id = "three" }) 3
-						@if (@item.Grade == 4)
-						{
-							isChecked = true;
-						}
-						else
-						{
-							isChecked = false;
-						}
-						@Html.RadioButton("grade" + gridNameId.ToString(), "4", isChecked, new { id = "four" }) 4
-						@if (@item.Grade == 5)
-						{
-							isChecked = true;
-						}
-						else
-						{
-							isChecked = false;
-						}
-						@Html.RadioButton("grade" + gridNameId.ToString(), "5", isChecked, new { id = "five" }) 5
-						@{	gridNameId++;
-						}
-				</span>
-				</text>, style: "col2Width"),
-				grid.Column("Action"," ", format: @<text>
-					<button class="save-grade">Save</button>
-				</text>, style: "col3Width", canSort: false)
 
-		   ))
 
-	</div>
+
+
+
+<div class="container centering-container">
+    @Html.ActionLink("Wstecz", "Psychologist", "Home", null, new { @class = "own-btn btn-info btn" })
+</div>
+
+
+
+
+
+
+
+    @*
+        <script src="~/bundles/jquery"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('.save-grade').on('click', function () {
+                    var tr = $(this).parents('tr:first');
+                    var selectedGrade = tr.find("input:checked").val();
+                    //alert(selectedGrade);
+                    var questionId = tr.find("#lblId").text();
+                    //alert(questionId);
+                    if (!selectedGrade) return;
+
+                    $.ajax({
+                        url: '/Surveys/SaveRateForQuestion/',
+                        data: { grade: selectedGrade, questionId: questionId,userId:"blee"},
+                        type: 'POST',
+                        success: function (data) {
+                            //alert(data);
+                        }
+                    });
+
+                });
+            })
+        </script>
+
+
+
+        <div id="gridContent" style=" padding:20px; ">
+            @grid.GetHtml(
+                tableStyle: "webgrid-table",
+                headerStyle: "webgrid-header",
+                footerStyle: "webgrid-footer",
+                alternatingRowStyle: "webgrid-alternating-row",
+                selectedRowStyle: "webgrid-selected-row",
+                rowStyle: "webgrid-row-style",
+                mode: WebGridPagerModes.All,
+                columns:
+                    grid.Columns(
+                     grid.Column("Id", "id", format: @<text>
+                            <span class="display-mode">
+                                <label id="lblId">@item.id</label>
+                            </span>
+                    </text>, style: "col2Width"),
+                        grid.Column("Question", "Pytanie", format: @<text>
+                            <span class="display-mode">
+                                <label id="lblQuestion">@item.Question</label>
+                            </span>
+                        </text>, style: "col2Width"),
+                        grid.Column("Grade", "Ocena", format: @<text>
+                        <span>
+                                @if (@item.Grade == 1)
+                                {
+                                    isChecked = true;
+                                }
+                                else
+                                {
+                                    isChecked = false;
+                                }
+
+                                @Html.RadioButton("grade" + gridNameId.ToString(), "1", isChecked, new { id = "one" }) 1
+                                @if (@item.Grade == 2)
+                                {
+                                    isChecked = true;
+                                }
+                                else
+                                {
+                                    isChecked = false;
+                                }
+                                @Html.RadioButton("grade" + gridNameId.ToString(), "2", isChecked, new { id = "two" }) 2
+                                @if (@item.Grade == 3)
+                                {
+                                    isChecked = true;
+                                }
+                                else
+                                {
+                                    isChecked = false;
+                                }
+                                @Html.RadioButton("grade" + gridNameId.ToString(), "3", isChecked, new { id = "three" }) 3
+                                @if (@item.Grade == 4)
+                                {
+                                    isChecked = true;
+                                }
+                                else
+                                {
+                                    isChecked = false;
+                                }
+                                @Html.RadioButton("grade" + gridNameId.ToString(), "4", isChecked, new { id = "four" }) 4
+                                @if (@item.Grade == 5)
+                                {
+                                    isChecked = true;
+                                }
+                                else
+                                {
+                                    isChecked = false;
+                                }
+                                @Html.RadioButton("grade" + gridNameId.ToString(), "5", isChecked, new { id = "five" }) 5
+                                @{	gridNameId++;
+                                }
+                        </span>
+                        </text>, style: "col2Width"),
+                        grid.Column("Action"," ", format: @<text>
+                            <button class="save-grade">Save</button>
+                        </text>, style: "col3Width", canSort: false)
+
+                   ))
+
+            </div>*@

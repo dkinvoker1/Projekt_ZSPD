@@ -148,6 +148,7 @@ namespace ZSPD.Controllers
                             UserName = model.Username,
                             Email = model.Email,
                         };
+
                         break;
                     default:
                         role = Roles.User;

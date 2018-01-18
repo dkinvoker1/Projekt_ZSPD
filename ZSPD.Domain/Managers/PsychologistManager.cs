@@ -1,5 +1,8 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using ZSPD.Domain.Models;
 using ZSPD.Domain.Models.EntityModels;
@@ -156,6 +159,52 @@ namespace ZSPD.Domain.Managers
             _context.Questions.Attach(question);
             _context.Questions.Remove(question);
             _context.SaveChanges();
+        }
+
+        public void AddQuestionFromExcel(string path, string authorId)
+        {
+            var question = new Question();
+            var answer = new Answer();
+            string questionSTR;
+           DataTable table = ReadExcel(path);
+            foreach (DataRow row in table.Rows)
+            {
+                if ((row.ItemArray[0].ToString()) == "")
+                {
+                    break;
+                }
+                if (row.ItemArray[0].ToString() != "")
+                {
+                    questionSTR = row.ItemArray[0].ToString();
+                    AddQuestion(questionSTR, authorId);
+                }
+
+            }
+        }
+
+        private DataTable ReadExcel(string path)
+        {
+            using (var pck = new OfficeOpenXml.ExcelPackage(new FileInfo(path)))
+            {
+
+                ExcelWorksheet worksheet = pck.Workbook.Worksheets.First();
+                DataTable dt = new DataTable();
+                foreach (var header in worksheet.Cells[1, 1, 1, worksheet.Dimension.End.Column])
+                {
+                    dt.Columns.Add(header.Text);
+                }
+                for (var numRow = 1; numRow <= worksheet.Dimension.End.Row; numRow++)
+                {
+                    var row = worksheet.Cells[numRow, 1, numRow, worksheet.Dimension.End.Column];
+                    var newRow = dt.NewRow();
+                    foreach (var cell in row)
+                    {
+                        newRow[cell.Start.Column - 1] = cell.Text;
+                    }
+                    dt.Rows.Add(newRow);
+                }
+                return dt;
+            }
         }
     }
 }

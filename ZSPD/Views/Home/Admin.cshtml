@@ -5,4 +5,6 @@
 
 <div class="row text-center" style="height:25vh;">
     <a href="~/Account/Register"><button class="col-lg-2 btn-info btn" style="height:25vh;">Załóż konto</button></a>
+    @Html.ActionLink("Zarządzaj studentami", "StudentsManage", "Admin", null, new { @class = "menu-tiles btn-info btn" })
+    @Html.ActionLink("Dodaj zagadnienie", "AddGraph", "Admin", null, new { @class = "menu-tiles btn-info btn" })
 </div>

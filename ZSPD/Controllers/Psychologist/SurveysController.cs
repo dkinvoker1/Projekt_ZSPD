@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNet.Identity;
 
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 using ZSPD.Domain.Managers;
@@ -74,8 +76,21 @@ namespace ZSPD.Controllers.Psychologist
 				model.QuestionRates.Add(singleRate);
 			}
 
-			return View(model);
+			return View(model.QuestionRates);
 		}
+
+
+        [Authorize(Roles = Roles.Psychologist + " ," + Roles.Judge)]
+        [HttpPost]
+        public RedirectToRouteResult RateQuestions(QuestionRate rate)
+        {
+            var userId = User.Identity.GetUserId();
+            _psychologistManager.AddOrUpdateRateQuestion(rate.Grade, userId, rate.Id);
+            //userId = User.Identity.GetUserId();
+            //_psychologistManager.AddOrUpdateRateQuestion(grade, userId, questionId);
+            return RedirectToAction("RateQuestions");
+        }
+
 
         [Authorize(Roles = Roles.Psychologist + " ," + Roles.Judge)]
         public JsonResult SaveRateForQuestion(int? grade, int questionId, string userId)
@@ -85,6 +100,15 @@ namespace ZSPD.Controllers.Psychologist
 			string message = "success";
 			return Json(message, JsonRequestBehavior.AllowGet);
 		}
+
+        [Authorize(Roles = Roles.Psychologist)]
+        public ActionResult RateSurveys()
+        {
+            var surveys = _psychologistManager.GetAllSurveys();
+            return View(surveys);
+        }
+
+
 
         [Authorize(Roles = Roles.Psychologist)]
         public ActionResult ModifyQuestions()
@@ -189,6 +213,22 @@ namespace ZSPD.Controllers.Psychologist
             _psychologistManager.AddQuestion(question, User.Identity.GetUserId());
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddQuestionsFromFile(HttpPostedFileBase file)
+        {
+            if (file.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/App_Data/Uploads"), fileName);
+
+                file.SaveAs(path);
+
+                _psychologistManager.AddQuestionFromExcel(path, User.Identity.GetUserId());
+            }
+
+            return RedirectToAction("AddQuestion", "Surveys");
         }
     }
 }
