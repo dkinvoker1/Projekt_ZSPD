@@ -142,9 +142,13 @@
     <Compile Include="Managers\IStudentManager.cs" />
     <Compile Include="Managers\PsychologistManager.cs" />
     <Compile Include="Managers\StudentManager.cs" />
-    <Compile Include="Migrations\201801162235142_new.cs" />
-    <Compile Include="Migrations\201801162235142_new.Designer.cs">
-      <DependentUpon>201801162235142_new.cs</DependentUpon>
+    <Compile Include="Migrations\201801172253586_nazwa.cs" />
+    <Compile Include="Migrations\201801172253586_nazwa.Designer.cs">
+      <DependentUpon>201801172253586_nazwa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801172258285_nazwa1.cs" />
+    <Compile Include="Migrations\201801172258285_nazwa1.Designer.cs">
+      <DependentUpon>201801172258285_nazwa1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -205,8 +209,11 @@
     <Content Include="Resources\Lista_zadan.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801162235142_new.resx">
-      <DependentUpon>201801162235142_new.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801172253586_nazwa.resx">
+      <DependentUpon>201801172253586_nazwa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801172258285_nazwa1.resx">
+      <DependentUpon>201801172258285_nazwa1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

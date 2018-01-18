@@ -76,8 +76,21 @@ namespace ZSPD.Controllers.Psychologist
 				model.QuestionRates.Add(singleRate);
 			}
 
-			return View(model);
+			return View(model.QuestionRates);
 		}
+
+
+        [Authorize(Roles = Roles.Psychologist + " ," + Roles.Judge)]
+        [HttpPost]
+        public RedirectToRouteResult RateQuestions(QuestionRate rate)
+        {
+            var userId = User.Identity.GetUserId();
+            _psychologistManager.AddOrUpdateRateQuestion(rate.Grade, userId, rate.Id);
+            //userId = User.Identity.GetUserId();
+            //_psychologistManager.AddOrUpdateRateQuestion(grade, userId, questionId);
+            return RedirectToAction("RateQuestions");
+        }
+
 
         [Authorize(Roles = Roles.Psychologist + " ," + Roles.Judge)]
         public JsonResult SaveRateForQuestion(int? grade, int questionId, string userId)
@@ -87,6 +100,15 @@ namespace ZSPD.Controllers.Psychologist
 			string message = "success";
 			return Json(message, JsonRequestBehavior.AllowGet);
 		}
+
+        [Authorize(Roles = Roles.Psychologist)]
+        public ActionResult RateSurveys()
+        {
+            var surveys = _psychologistManager.GetAllSurveys();
+            return View(surveys);
+        }
+
+
 
         [Authorize(Roles = Roles.Psychologist)]
         public ActionResult ModifyQuestions()

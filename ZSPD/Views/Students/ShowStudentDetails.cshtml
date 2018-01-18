@@ -4,14 +4,17 @@
     ViewBag.Title = "ShouStudentDetails";
 }
 
-<h2>ShouStudentDetails</h2>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/OwnStyles.css" rel="stylesheet" />
+
+@Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Edytuj pytania" } })
 
 <div>
     <h4>@Model.UserName</h4>
     <hr />
     @foreach (var completedSurvey in Model.CompletedSurveys)
     {
-        <table class="table">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     Id Ankiety: @completedSurvey.SurveyId
