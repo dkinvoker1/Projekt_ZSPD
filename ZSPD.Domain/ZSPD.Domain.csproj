@@ -142,9 +142,9 @@
     <Compile Include="Managers\IStudentManager.cs" />
     <Compile Include="Managers\PsychologistManager.cs" />
     <Compile Include="Managers\StudentManager.cs" />
-    <Compile Include="Migrations\201801162235142_new.cs" />
-    <Compile Include="Migrations\201801162235142_new.Designer.cs">
-      <DependentUpon>201801162235142_new.cs</DependentUpon>
+    <Compile Include="Migrations\201801180902476_a.cs" />
+    <Compile Include="Migrations\201801180902476_a.Designer.cs">
+      <DependentUpon>201801180902476_a.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -205,8 +205,8 @@
     <Content Include="Resources\Lista_zadan.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801162235142_new.resx">
-      <DependentUpon>201801162235142_new.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801180902476_a.resx">
+      <DependentUpon>201801180902476_a.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

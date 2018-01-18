@@ -29,3 +29,20 @@
         </div>
 }
 
+@foreach (var subject in Model.AllSubjects)
+{
+    var userIssues = Model.ActualStudent.SolvedIssues.Where(x => x.graph.Id == subject.Id);
+    <table class="table" style="float: left">
+        <tr>
+            <th>
+                @subject.Name
+            </th>
+        </tr>
+        @foreach (var issue in userIssues)
+        {
+            <tr>
+                <td>@issue.issueNumber</td>
+            </tr>
+        }
+    </table>
+}

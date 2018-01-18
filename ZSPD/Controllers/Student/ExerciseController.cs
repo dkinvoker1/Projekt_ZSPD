@@ -48,12 +48,14 @@ namespace ZSPD.Controllers.Student
             }
 
             var ex = _studentManager.GetNextExcerciseNumber(exercise, true, userId);
+            var subject = _studentManager.GetActualSubject(userId);
 
             var vm = new ExcerciseViewModel()
             {
                 ExcerciseNumber = exercise,
                 Answer = true,
                 NextExcerciseNumber = ex,
+                SubjectName = subject.Name,
             };
             return View(vm);
         }
