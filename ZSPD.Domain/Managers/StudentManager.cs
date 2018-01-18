@@ -56,6 +56,14 @@ namespace ZSPD.Domain.Managers
             }
         }
 
+        public SubjectGraph GetActualSubject(string userId)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                return context.Students.FirstOrDefault(x => x.Id == userId).ActualSubject;
+            }
+        }
+
         public int GetResolvedExerciseNumber(string userID)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
@@ -393,13 +401,13 @@ namespace ZSPD.Domain.Managers
                     using (ApplicationDbContext db = new ApplicationDbContext())
                     {
                        var user = db.Students.FirstOrDefault(ex => ex.Id == userID);
-                       var solvedExcercises = user.ProperlySolvedExcercises.Where(ex => ex.graph.Id == user.ActualSubject.Id);
+                       var solvedExcercises = user.ProperlySolvedExcercises.Where(ex => ex.graph.Id == user.ActualSubject.Id).ToList();
                         foreach(var ex in solvedExcercises)
                         {
                             user.ProperlySolvedExcercises.Remove(ex);
                         }
 
-                        var solvedIssues = user.SolvedIssues.Where(ex => ex.graph.Id == user.ActualSubject.Id);
+                        var solvedIssues = user.SolvedIssues.Where(ex => ex.graph.Id == user.ActualSubject.Id).ToList();
                         foreach (var ex in solvedIssues)
                         {
                             user.SolvedIssues.Remove(ex);

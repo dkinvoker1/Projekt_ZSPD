@@ -62,11 +62,11 @@ namespace ZSPD.Domain.Migrations
             if (context.SubjectGraphs.Count() == 0)
             {
                 // wczytanie z pliku tekstowego wartosci dla nastepnikow
-                string poj = System.IO.File.ReadAllText(MapPath("~/Resources/Lista_pojec.txt")); // Cofniêcie o 1 folder w drzewku
+                string poj = File.ReadAllText(MapPath("~/Resources/Lista_pojec.txt")); // Cofniêcie o 1 folder w drzewku
                                                                                                  // wczytanie z pliku tekstowego wartosci dla poprzednikow
-                string poj1 = System.IO.File.ReadAllText(MapPath("~/Resources/Lista_pojec1.txt"));
+                string poj1 = File.ReadAllText(MapPath("~/Resources/Lista_pojec1.txt"));
                 // wczytanie z pliku tekstowego zadan dla odp pojec
-                string zad = System.IO.File.ReadAllText(MapPath("~/Resources/Lista_zadan.txt"));
+                string zad = File.ReadAllText(MapPath("~/Resources/Lista_zadan.txt"));
 
                 SubjectGraph graph = new SubjectGraph()
                 {

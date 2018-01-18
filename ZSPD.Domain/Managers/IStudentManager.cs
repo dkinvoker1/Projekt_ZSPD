@@ -20,5 +20,7 @@ namespace ZSPD.Domain.Managers
         int GetResolvedExerciseNumber(string userID);
 
         void SetActiveSubject(string userID, int subjectId);
+
+        SubjectGraph GetActualSubject(string userId);
     }
 }
