@@ -1,22 +1,23 @@
-﻿
+﻿<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/OwnStyles.css" rel="stylesheet" />
+@Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Dodaj zagadnienie" } })
 @{
     ViewBag.Title = "AddGraph";
 }
 
-<h2>AddGraph</h2>
 @using (Html.BeginForm("UploadGraph", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <input type="text" name="name" id="name"/>
+    <p>Nazwa zagadnienia: </p><input type="text" name="name" id="name"/> <br />
 
-    <label for="file1">Filename1:</label>
+    <label for="file1">Lista następników:</label>
     <input type="file" name="files" id="file1" />
 
-    <label for="file2">Filename2:</label>
+    <label for="file2">Lista poprzedników:</label>
     <input type="file" name="files" id="file2" />
 
-    <label for="file2">Filename3:</label>
+    <label for="file2">Lista zadań:</label>
         <input type="file" name="files" id="file2" />
 
 
-    <input type="submit" name="Submit" id="Submit" value="UploadGraph" />
+    <input type="submit" name="Submit" id="Submit" value="Dodaj graf" />
 }

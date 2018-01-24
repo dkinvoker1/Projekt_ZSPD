@@ -4,8 +4,8 @@
     ViewBag.Title = "StudentsManage";
 }
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+@Html.Partial("_HeaderNavBar", new ViewDataDictionary { { "name", "Zarządzanie studentami" } })
 
-<h2>StudentsManage</h2>
 
 <table class="table">
     <tr>
@@ -34,3 +34,8 @@
 }
 
 </table>
+
+<div class="container centering-container">
+    @Html.ActionLink("Wstecz", "Admin", "Home", null, new { @class = "own-btn btn-info btn" })
+</div>
+
